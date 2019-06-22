@@ -34,7 +34,7 @@ if (target === 'development') {
         ENV_TITLE: "dev"
         ,API_ROOT: ""
     }
-} else if (target === 'prod') {
+} else if (target === 'production') {
     //线上
     envParams = {
         ENV_TITLE: "prod"
@@ -42,6 +42,9 @@ if (target === 'development') {
         ,TEST_USERNAME: ""
         ,TEST_PASSWORD: ""
         ,TEST_CAPRCHA: ""
+        ,DEMO_MENU: false
+        ,MOCK_LOGIN: false
+        ,MOCK_DEMO_USER: false
     }
 } else   if (target === 'debug') {
     //本地
