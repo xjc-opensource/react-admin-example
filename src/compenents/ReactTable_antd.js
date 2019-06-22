@@ -1,40 +1,55 @@
-import React from "react";
-import {Table} from "antd";
-import {ReactTableList} from "./ReactTableList";
+import React from 'react';
+import {ReactTableList_antd} from './ReactTableList_antd';
+import {Button, Divider, Modal, Spin} from 'antd';
+import {ReactTable} from './ReactTable';
 
-export class ReactTable_antd extends ReactTableList {
+export class ReactTable_antd extends ReactTable {
     constructor(props) {
         super(props);
-        this.state.columns = props.columns;
-        this.state.dataList = [];
+        this.tableConfig.tableListElement = ReactTableList_antd;
     }
 
-    onShowSizeChange(current, pageSize) {
-        console.log({current: current, pageSize: pageSize});
-        this.requestListPageData(current, pageSize);
+    handleDeleteData(id) {
+        Modal.confirm({
+            title: '',
+            content: '确认要删除数据',
+            okText: '是',
+            okType: 'danger',
+            cancelText: '否',
+            onOk: () => {
+                this.requestDeleteData(id);
+            }
+        });
     }
 
-    onChange(pageNumber) {
-        console.log('Page: ', pageNumber);
-        this.requestListPageData(pageNumber);
+    getOperateColumsElement() {
+        return ([{
+            title: 'Action',
+            key: 'action',
+            render: (text, record) => (
+                <div>
+                    <Button type="link" onClick={this.handleEditData.bind(this, record)}><u>编辑</u></Button>
+                    <Divider type="vertical"/>
+                    <Button type="link" onClick={this.handleDeleteData.bind(this, record.id)}><u>删除</u></Button>
+                </div>
+            ),
+        }]);
     }
 
     render() {
         return (
             <div>
-                <Table columns={this.state.columns} dataSource={this.state.dataList} rowKey={this.reqData.rowKey}
-                       loading={this.state.loading}
-                       pagination={{
-                           pageSizeOptions: ['10', '20', '30'],
-                           showSizeChanger: true,
-                           onChange: this.onChange.bind(this),
-                           onShowSizeChange: this.onShowSizeChange.bind(this),
-                           current: this.state.current,
-                           total: this.state.total,
-                           pageSize: this.state.pageSize,
-                       }}>
-                </Table>
+                <Spin spinning={this.state.loading}>
+                    <div className="tableQueryPanel">
+                        {this.getAddFormElement()}
+                        {this.getEditFormElement()}
+                        {this.getQueryFormElement()}
+                    </div>
+                    {this.getTableListElement()}
+                </Spin>
             </div>
         );
     }
 }
+
+export default ReactTable_antd;

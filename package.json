@@ -83,7 +83,7 @@
   },
   "eslintConfig": {
     "extends": "react-app",
-    "rules":{
+    "rules": {
       "no-console": "off",
       "no-extend-native": "off"
     }

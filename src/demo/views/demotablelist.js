@@ -1,7 +1,7 @@
 import React from "react";
-import {ReactTable_antd} from "@/compenents/ReactTable_antd";
+import {ReactTableList_antd} from "@/compenents/ReactTableList_antd";
 
-class Demotablelist extends React.Component {
+class DemoTableList extends React.Component {
     render() {
         const columns = [
             {
@@ -39,10 +39,10 @@ class Demotablelist extends React.Component {
             },
         ];
         return (
-            <ReactTable_antd url='/user/listpage' auto={true} columns={columns}>
-            </ReactTable_antd>
+            <ReactTableList_antd url='/user/listpage' auto={true} columns={columns}>
+            </ReactTableList_antd>
         );
     }
 }
 
-export default Demotablelist;
+export default DemoTableList;

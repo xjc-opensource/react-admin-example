@@ -1,5 +1,5 @@
 import {DatePicker, Form, Input} from "antd";
-import ReactTableManager from "@/compenents/ReactTableManager";
+import ReactTable_antd from "@/compenents/ReactTable_antd";
 import React from "react";
 import {ReactBoxAddForm_antd, ReactBoxEditForm_antd, ReactQueryForm_antd} from "@/compenents/ReactForm_antd";
 
@@ -105,11 +105,11 @@ class DemoTableQueryForm extends ReactQueryForm_antd {
 }
 
 
-class Demotable extends ReactTableManager {
+class DemoTable extends ReactTable_antd {
     constructor(props) {
         super(props);
 
-        Object.assign(this.reqData, {
+        Object.assign(this.tableConfig, {
             url: '/user/listpage',
             auto: true,
             delUrl: '/user/delete',
@@ -118,10 +118,11 @@ class Demotable extends ReactTableManager {
             addFormElement: DemoTableAddForm,
             editFormElement: DemoTableEditForm,
             queryFormElement: DemoTableQueryForm,
+            headerColumnsElement: this.getHeaderColumnsElement(),
         });
     }
 
-    getHeaderColumns() {
+    getHeaderColumnsElement() {
         return [
             {
                 title: '序号',
@@ -159,4 +160,4 @@ class Demotable extends ReactTableManager {
     }
 }
 
-export default Demotable;
+export default DemoTable;

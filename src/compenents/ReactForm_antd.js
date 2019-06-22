@@ -2,8 +2,7 @@ import React from "react";
 import {Button, Form, Modal, Spin} from "antd";
 import {ReactRequest} from "./ReactRequest";
 
-
-class ReactForm_antd_base extends ReactRequest {
+class ReactForm extends ReactRequest {
     componentDidMount() {
         if (this.props.onRef) {
             this.props.onRef(this);
@@ -18,7 +17,7 @@ class ReactForm_antd_base extends ReactRequest {
     };
 }
 
-export class ReactBoxForm_antd extends ReactForm_antd_base {
+export class ReactBoxForm_antd extends ReactForm {
     constructor(props) {
         super(props);
         this.state.showFlag = false;
@@ -30,7 +29,7 @@ export class ReactBoxForm_antd extends ReactForm_antd_base {
 
     showElement = null;
 
-    handleOpenShow = () => {
+    handleOpenShow = (data) => {
         this.setState({showFlag: true});
     };
 
@@ -133,7 +132,7 @@ export class ReactBoxEditForm_antd extends ReactBoxForm_antd {
 }
 
 
-export class ReactQueryForm_antd extends ReactForm_antd_base {
+export class ReactQueryForm_antd extends ReactForm {
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, fieldsValue) => {
