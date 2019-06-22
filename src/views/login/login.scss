@@ -1,0 +1,25 @@
+@import '@/assets/styles/_variable.scss';
+
+.container {
+    padding: 20px;
+    text-align: center;
+    margin:0 auto;
+    width:700px;
+    height:300px;
+
+    background-color: ghostwhite;
+    position:relative;
+    bottom: -200px;
+    border: lightgray solid 1px;
+}
+
+.loginContainer {
+    position: absolute;
+    left:0px;
+    bottom:0px;
+    border: lightgray solid 1px;
+    padding: 10px;
+    width: 100%;
+    background-color: $login-background-color;
+}
+

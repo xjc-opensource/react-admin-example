@@ -1,0 +1,75 @@
+.trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.trigger:hover {
+    color: #1890ff;
+}
+
+.trigger{
+    font-size: 18px;
+    line-height: 64px;
+    cursor: pointer;
+}
+.trigger:hover{
+    color: #1890ff;
+}
+
+.header-ul{
+    display: flex;
+    width: 300px;
+}
+.header-ul li {
+    flex-grow: 1;
+    text-align: center;
+}
+.header-ul>li img{
+    width: 35px;
+    height: 35px;
+    border-radius: 100px;
+}
+
+.menu{
+    line-height: 2em;
+    padding: 0 10px;
+}
+.menu-group li{
+  /*  padding: 0 24px;*/
+    line-height: 2em;
+}
+
+.header {
+    margin: 0;
+    padding: 0;
+    padding-right: 20px;
+    line-height: 0em;
+    background: #FFFFFF;
+}
+
+.logo {
+    height: 32px;
+    background: rgba(255, 255, 255, .2);
+    margin: 16px;
+    text-align: center;
+    line-height: 32px;
+    color: #FFFFFF;
+    overflow: hidden;
+}
+
+.tableform {
+    border:0px solid red;
+    display: flow;
+    padding-bottom: 4px;
+    position: relative;
+    float: right;
+    z-index: 100;
+}
+
+.queryform {
+/*    background: #61dafb;
+    color: #FFFFFF;*/
+}
