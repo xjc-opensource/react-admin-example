@@ -15,6 +15,7 @@ github地址：[基于react+antd的后台框架](https://github.com/xjc-opensour
  - redux / mobx
  - eslint
  - sass
+
 # 2、框架初始化
 2.1 安装插件  
 ``` 
@@ -25,9 +26,10 @@ github地址：[基于react+antd的后台框架](https://github.com/xjc-opensour
   npm install --save react-router-dom  
   npm install --save react-load-script  
   npm install --save antd  
+  npm install --save node-sass 
   npm install --save-dev babel-plugin-import
   npm install --save-dev @babel/plugin-proposal-decorators
-  npm install --save node-sass 
+  npm install --save-dev core-decorators 
     
   npm install --save axios  
   npm install --save mockjs 
@@ -90,7 +92,7 @@ github地址：[基于react+antd的后台框架](https://github.com/xjc-opensour
     * utils - 通用工具类
     * views - 页面
     * app.js - 页面入口
-    * sidernav.js - 加载入口
+    * main.js - 加载入口
 * README.md - 项目说明
 * README-modify.md - 更新记录
 ```
@@ -136,6 +138,7 @@ github地址：[基于react+antd的后台框架](https://github.com/xjc-opensour
 * antd: https://ant.design
 * react-devtools: https://github.com/facebook/react-devtools
 * react-devtools-setup: https://www.jianshu.com/p/6c1a4d18e002
+
 
 link:  
    weixin: chinaxjc208

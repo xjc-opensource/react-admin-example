@@ -1,0 +1,7 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "no-console": "off",
+    "no-extend-native": "off"
+  }
+}
