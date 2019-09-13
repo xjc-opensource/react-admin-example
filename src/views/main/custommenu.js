@@ -11,41 +11,67 @@ class CustomMenu extends React.Component {
     }
 
     componentDidMount() {
-/*        // 防止页面刷新侧边栏又初始化了
+        // 防止页面刷新侧边栏又初始化了
+        const currKey = this.props.location.pathname + this.props.location.search + this.props.location.hash;
         const pathname = this.props.location.pathname;
         //获取当前所在的目录层级
-        const rank = pathname.split('/')
+        const rank = pathname.split('/');
+        console.log("rank.length" + rank.length);
+
         switch (rank.length) {
             case 2 :  //一级目录
                 this.setState({
-                    selectedKeys: [pathname]
+                    selectedKeys: [currKey],
+                    openKeys: []
                 })
                 break;
             case 5 : //三级目录，要展开两个subMenu
                 this.setState({
-                    selectedKeys: [pathname],
+                    selectedKeys: [currKey],
                     openKeys: [rank.slice(0, 3).join('/'), rank.slice(0, 4).join('/')]
                 })
                 break;
             default :
                 this.setState({
-                    selectedKeys: [pathname],
+                    selectedKeys: [currKey],
                     openKeys: [pathname.substr(0, pathname.lastIndexOf('/'))]
                 })
-        }*/
+        }
     }
 
     componentWillReceiveProps(nextProps) {
         //当点击面包屑导航时，侧边栏要同步响应
-        const pathname = nextProps.location.pathname
-        if (this.props.location.pathname !== pathname) {
+        const nextKey = nextProps.location.pathname + nextProps.location.search + nextProps.location.hash;
+        const currKey = this.props.location.pathname + this.props.location.search + this.props.location.hash;
+        console.log("nextKey:" + nextKey);
+        console.log("currKey:" + currKey);
+
+
+
+        if ( currKey !== nextKey) {
+            const rank = nextProps.location.pathname.split('/');
+            let openKeys = [];
+            switch (rank.length) {
+                case 2 :  //一级目录
+                    openKeys = [];
+                    break;
+                case 5 : //三级目录，要展开两个subMenu
+                    openKeys = [rank.slice(0, 3).join('/'), rank.slice(0, 4).join('/')];
+                    break;
+                default :
+                    openKeys = [nextProps.location.pathname.substr(0, nextProps.location.pathname.lastIndexOf('/'))];
+                    break;
+            }
+
             this.setState({
-                selectedKeys: [pathname],
+                selectedKeys: [nextKey],
+                openKeys:openKeys,
             })
         }
     }
 
     onOpenChange = (openKeys) => {
+        console.log("openKeys:" + openKeys);
         //此函数的作用只展开当前父级菜单（父级菜单下可能还有子菜单）
         if (openKeys.length === 0 || openKeys.length === 1) {
             this.setState({

@@ -38,6 +38,12 @@ class DemoTableList extends React.Component {
 
             },
         ];
+        const xx =   {
+            title: 'Sex',
+            dataIndex: 'sex',
+            key: 'sex',
+
+        };
         return (
             <ReactTableList_antd url='/user/listpage' auto={true} columns={columns}>
             </ReactTableList_antd>

@@ -8,9 +8,16 @@ export function getCookie(name, defaultValue) {
 }
 
 export function getQueryStringByName(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-    var r = window.location.search.substr(1).match(reg);
-    var context = "";
+    let path = window.location.search;
+    if (path === "") {
+        if (window.location.hash.indexOf("?") > 0) {
+            path = "?" + window.location.hash.split("?")[1];
+        }
+    }
+
+    let reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    let r = path.substr(1).match(reg);
+    let context = "";
     if (r != null)
         context = r[2];
     reg = null;

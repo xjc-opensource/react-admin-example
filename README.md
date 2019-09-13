@@ -43,6 +43,8 @@ github地址：[基于react+antd的后台框架](https://github.com/xjc-opensour
   npm install --save react-loadable
   npm install --save nprogress
   npm install --save screenfull
+  
+  npm install --save react-tinymce
 
   npm install --save js-md5
   npm install --save react-intl 

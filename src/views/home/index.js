@@ -3,9 +3,11 @@ import './style.css'
 
 class Home extends React.Component {
     render() {
+        let helloString = " Hello World  !!!";
         return (
-            <div style={styles.bg} className='home'>
+            <div style={styles.bg} className='home'   >
                 Hello World!!!
+                <div dangerouslySetInnerHTML={{ __html: helloString }} />
             </div>
         )
     }
