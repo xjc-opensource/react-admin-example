@@ -32,7 +32,7 @@ export class ReactRequest extends React.Component {
     }
 
     cancelRequest() {
-        if ((this.source)) {
+        if ((this.source) && (this.state.loading)) {
             let msg = '组件卸载,取消请求';
             console.log(msg);
             this.source.cancel(msg);

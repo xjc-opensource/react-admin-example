@@ -13,14 +13,36 @@ const LoginUsers = [
     }
 ];
 
+let UserData = {
+    baseInfo: null,
+    menuList: [        {
+        "groupName": "基本配置",
+        "code": "fun_x_02",
+        "name": "x_02",
+        "groupIndex": 1
+    },
+        {
+            "groupName": "基本配置",
+            "code": "fun_x_t_goods_type",
+            "name": "x_t_goods_type",
+            "groupIndex": 1
+        }
+        ],
+    count:61,
+}
+
 export default {
     bootstrap: function (mock) {
+        let _userData = UserData;
+
         mock.onGet('/success').reply(200, getResultSuccess(null, 'success'));
         mock.onGet('/error').reply(500, getResultError(null, 'failure'));
 
         mock.onGet(ApiUrl.GET_LOGININFO).reply(()=> {
             return new Promise((resolve) => {
-                resolve([200, getResultSuccess({count:61}, '请求成功')]);
+                setTimeout(() => {
+                    resolve([200, getResultSuccess(_userData, '请求成功')]);
+                }, 1000);
             })
         });
 
@@ -38,6 +60,7 @@ export default {
                             return false;
                         });
                         if (hasUser) {
+                            _userData.baseInfo = user;
                             resolve([200, getResultSuccess(user, '请求成功')]);
                         } else {
                             resolve([200, getResultError('账号或密码错误')]);

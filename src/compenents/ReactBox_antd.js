@@ -1,7 +1,7 @@
 import React from "react";
 import {Modal} from "antd";
 
-export class ReactBox_antd extends React.Component {
+export class ReactBoxAntd extends React.Component {
     handleAddShow = () => {
         const {data} = this.props;
         data.visible = true;

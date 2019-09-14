@@ -10,108 +10,72 @@ class CustomMenu extends React.Component {
         selectedKeys: []
     }
 
-    componentDidMount() {
-        // 防止页面刷新侧边栏又初始化了
-        const currKey = this.props.location.pathname + this.props.location.search + this.props.location.hash;
-        const pathname = this.props.location.pathname;
-        //获取当前所在的目录层级
-        const rank = pathname.split('/');
-        console.log("rank.length" + rank.length);
+    linkPathKey = {};
 
-        switch (rank.length) {
-            case 2 :  //一级目录
-                this.setState({
-                    selectedKeys: [currKey],
-                    openKeys: []
-                })
-                break;
-            case 5 : //三级目录，要展开两个subMenu
-                this.setState({
-                    selectedKeys: [currKey],
-                    openKeys: [rank.slice(0, 3).join('/'), rank.slice(0, 4).join('/')]
-                })
-                break;
-            default :
-                this.setState({
-                    selectedKeys: [currKey],
-                    openKeys: [pathname.substr(0, pathname.lastIndexOf('/'))]
-                })
+    findKeyItem(key) {
+        let item = this.linkPathKey[key];
+        if (item) {
+            return item;
+        } else {
+            return null;
         }
+    }
+
+    componentDidMount() {
     }
 
     componentWillReceiveProps(nextProps) {
-        //当点击面包屑导航时，侧边栏要同步响应
-        const nextKey = nextProps.location.pathname + nextProps.location.search + nextProps.location.hash;
-        const currKey = this.props.location.pathname + this.props.location.search + this.props.location.hash;
-        console.log("nextKey:" + nextKey);
-        console.log("currKey:" + currKey);
-
-
-
-        if ( currKey !== nextKey) {
-            const rank = nextProps.location.pathname.split('/');
-            let openKeys = [];
-            switch (rank.length) {
-                case 2 :  //一级目录
-                    openKeys = [];
-                    break;
-                case 5 : //三级目录，要展开两个subMenu
-                    openKeys = [rank.slice(0, 3).join('/'), rank.slice(0, 4).join('/')];
-                    break;
-                default :
-                    openKeys = [nextProps.location.pathname.substr(0, nextProps.location.pathname.lastIndexOf('/'))];
-                    break;
-            }
-
+        let currKey = nextProps.location.pathname + nextProps.location.search;
+       // console.log("currKey:", currKey);
+        let item = this.findKeyItem(currKey);
+        if (item == null) {
+            item = this.findKeyItem(nextProps.location.pathname);
+        }
+        //console.log("item:", item);
+        if (item != null) {
             this.setState({
-                selectedKeys: [nextKey],
-                openKeys:openKeys,
+                selectedKeys: [item.key],
+                openKeys: item.parentKey,
             })
         }
     }
 
-    onOpenChange = (openKeys) => {
-        console.log("openKeys:" + openKeys);
-        //此函数的作用只展开当前父级菜单（父级菜单下可能还有子菜单）
-        if (openKeys.length === 0 || openKeys.length === 1) {
+    onOpenChange = (xkeys) => {
+       let iLen = xkeys.length;
+        this.setState({
+            openKeys: xkeys,
+            //selectedKeys: [],
+        });
+       if (iLen>0) {
             this.setState({
-                openKeys
-            })
-            return;
-        }
-
-        //最新展开的菜单
-        const latestOpenKey = openKeys[openKeys.length - 1]
-        //判断最新展开的菜单是不是父级菜单，若是父级菜单就只展开一个，不是父级菜单就展开父级菜单和当前子菜单
-        //因为我的子菜单的key包含了父级菜单，所以不用像官网的例子单独定义父级菜单数组，然后比较当前菜单在不在父级菜单数组里面。
-        //只适用于3级菜单
-        if (latestOpenKey.includes(openKeys[0])) {
-            this.setState({
-                openKeys
-            })
-        } else {
-            this.setState({
-                openKeys: [latestOpenKey]
-            })
+                openKeys: [xkeys[iLen-1]],
+            });
         }
     }
 
-    renderMenuItem = ({key, icon, title,}) => {
+    renderMenuItem = (parentKey,{key, icon, title, linkPath,}) => {
+         let spath = key;
+         if (linkPath) {
+             spath = linkPath;
+         }
+
+         this.linkPathKey[spath] = { key: key, parentKey: parentKey};
+
         return (
             <Menu.Item key={key}>
-                <Link to={key}>
+                <Link to={spath}>
                     {icon && <Icon type={icon}/>}
                     <span>{title}</span>
                 </Link>
             </Menu.Item>
         )
     }
-    renderSubMenu = ({key, icon, title, subs}) => {
+    renderSubMenu = (parentKey, {key, icon, title, subs, linkPath}) => {
         return (
             <Menu.SubMenu key={key} title={<span>{icon && <Icon type={icon}/>}<span>{title}</span></span>}>
                 {
                     subs && subs.map(item => {
-                        return item.subs && item.subs.length > 0 ? this.renderSubMenu(item) : this.renderMenuItem(item)
+                        return item.subs && item.subs.length > 0 ? this.renderSubMenu([...parentKey].push(item.key),item) : this.renderMenuItem(parentKey, item)
                     })
                 }
             </Menu.SubMenu>
@@ -123,7 +87,7 @@ class CustomMenu extends React.Component {
         return (
             <div>
                 <Menu
-                    onOpenChange={this.onOpenChange}
+                    onOpenChange={this.onOpenChange.bind(this)}
                     onClick={({key}) => this.setState({selectedKeys: [key]})}
                     openKeys={openKeys}
                     selectedKeys={selectedKeys}
@@ -131,7 +95,7 @@ class CustomMenu extends React.Component {
                     mode='inline'>
                     {
                         this.props.menus && this.props.menus.map(item => {
-                            return item.subs && item.subs.length > 0 ? this.renderSubMenu(item) : this.renderMenuItem(item)
+                            return item.subs && item.subs.length > 0 ? this.renderSubMenu([item.key],item) : this.renderMenuItem([],item)
                         })
                     }
                 </Menu>

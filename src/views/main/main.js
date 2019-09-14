@@ -1,5 +1,5 @@
 import React from "react";
-import {Layout} from "antd";
+import {Layout, Spin} from "antd";
 import Session from '@/core/session';
 import Api from '@/api/api';
 import './main.css';
@@ -7,8 +7,21 @@ import CustomHeader  from './customheader';
 import CustomMenu from "./custommenu";
 import DemoMenu from '@/demo/demoMenu';
 import Router from '@/router/router'
+import {connect} from "react-redux";
+import * as UserAction  from '@/store/user/action.js'
+import {withRouter} from 'react-router-dom'
 
 const {Sider, Header, Content, Footer} = Layout;
+
+@withRouter
+@connect(
+    state => ({
+        user: state.userInfo
+    }),
+    {   getUserInfo: UserAction.get,
+        setUserMenu: UserAction.setUserMenu,
+    }
+)
 
 class Main extends React.Component {
     constructor(props) {
@@ -17,7 +30,7 @@ class Main extends React.Component {
     }
 
     state = {
-        collapsed: false
+        collapsed: false,
     }
 
     toggle = () => {
@@ -43,30 +56,37 @@ class Main extends React.Component {
         }
     }
 
-    render() {
+    componentDidMount(){
         const menuList = [
             {key: '/home', title: '首页', icon: 'bank',},
             {
-                key: '/home/general', title: '基本组件', icon: 'laptop',
+                key: '/homex', title: '基本组件', icon: 'laptop',
                 subs: [
-                    {key: '/home/mqtt', title: 'mqtt', icon: '',},
-                    {key: '/home/about', title: '关于', icon: '',},
+                    {key: '/homex/mqtt', linkPath:'/general/mqtt', title: 'mqtt', icon: '',},
+                    {key: '/homex/about', linkPath:'/general/about', title: '关于', icon: '',},
                 ]
             },
         ];
 
         if (true === this.GlobalEnvParams.DEMO_MENU) {
             menuList.push(...DemoMenu);
-        };
+        }
 
+        this.props.setUserMenu(menuList);
+        this.props.getUserInfo();
+    }
 
+    render() {
+     //   alert(JSON.stringify(this.props.user.menuList));
         return (
             <div id='page'>
                 <Layout>
                     <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
                         <div style={{height: '100vh', overflowY: 'auto'}}>
                         <div className="logo">React Admin Example</div>
-                        <CustomMenu menus={menuList}/>
+                            <Spin spinning={this.props.user.loading} tip='菜单加载中...'>
+                             <CustomMenu menus={this.props.user.menuList}/>
+                            </Spin>
                         </div>
                     </Sider>
                     <Layout>
@@ -90,6 +110,7 @@ class Main extends React.Component {
             </div>
         );
     }
+
 }
 
 export default Main;

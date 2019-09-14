@@ -3,7 +3,7 @@ import Api from '@/api/api';
 
 export const get = () => {
     return dispatch => {
-        return Api.getUrl(Api.Url.GET_LOGININFO).then((res) => {
+        return Api.getUrl(Api.Url.GET_COUNT).then((res) => {
             dispatch(set(res.data.count));
             return res;
         }, (err) => {

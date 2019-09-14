@@ -17,10 +17,6 @@ function getSessionData() {
     }
 }
 
-function getSessionMenuList() {
-    return JSON.parse(sessionStorage.getItem('menuList'));
-}
-
 function isAuthSession() {
     let user = JSON.parse(sessionStorage.getItem('user'));
     if (user) {
@@ -28,6 +24,10 @@ function isAuthSession() {
     } else {
         return false;
     }
+}
+
+function getSessionMenuList() {
+    return JSON.parse(sessionStorage.getItem('menuList'));
 }
 
 function saveSession(sessionData) {

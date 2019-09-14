@@ -66,7 +66,7 @@ class NormalLoginForm extends React.Component {
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state.flagString = this.GlobalEnvParams.ENV_TITLE;
+        this.flagString = this.GlobalEnvParams.ENV_TITLE;
     }
 
     data = {
@@ -76,7 +76,6 @@ class Login extends React.Component {
     };
 
     state = {
-        flagString: '',
         loading: false
     };
 
@@ -115,7 +114,7 @@ class Login extends React.Component {
     render() {
         return (
             <div className="container testscss">
-                <h3>React Admin Example - {this.state.flagString}</h3>
+                <h3>React Admin Example - {this.flagString}</h3>
                 <div className="loginContainer">
                     <NormalLoginForm
                         loading={this.state.loading}

@@ -2,7 +2,7 @@ import React from "react";
 import {Table, Spin} from "antd";
 import {ReactTableList} from "./ReactTableList";
 
-export class ReactTableList_antd extends ReactTableList {
+export class ReactTableListAntd extends ReactTableList {
     constructor(props) {
         super(props);
         this.state.columns = props.columns;

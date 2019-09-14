@@ -1,5 +1,5 @@
 import React from "react";
-import {ReactTableList_antd} from "@/compenents/ReactTableList_antd";
+import {ReactTableListAntd} from "@/compenents/ReactTableList_antd";
 
 class DemoTableList extends React.Component {
     render() {
@@ -38,15 +38,9 @@ class DemoTableList extends React.Component {
 
             },
         ];
-        const xx =   {
-            title: 'Sex',
-            dataIndex: 'sex',
-            key: 'sex',
-
-        };
         return (
-            <ReactTableList_antd url='/user/listpage' auto={true} columns={columns}>
-            </ReactTableList_antd>
+            <ReactTableListAntd url='/user/listpage' auto={true} columns={columns}>
+            </ReactTableListAntd>
         );
     }
 }

@@ -1,12 +1,12 @@
 import React from 'react';
-import {ReactTableList_antd} from './ReactTableList_antd';
+import {ReactTableListAntd} from './ReactTableList_antd';
 import {Button, Divider, Modal, Spin} from 'antd';
 import {ReactTable} from './ReactTable';
 
 export class ReactTable_antd extends ReactTable {
     constructor(props) {
         super(props);
-        this.tableConfig.tableListElement = ReactTableList_antd;
+        this.tableConfig.tableListElement = ReactTableListAntd;
     }
 
     handleDeleteData(id) {

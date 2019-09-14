@@ -17,7 +17,7 @@ import {connect} from 'react-redux'
 class Customheader extends React.Component {
     state = {
         icon: 'arrows-alt',
-        count: 100,
+        count: 10000,
         visible: false
     };
 
@@ -96,7 +96,7 @@ class Customheader extends React.Component {
                     <ul className='header-ul'>
                         <li><Icon type={icon} onClick={this.screenfullToggle}/></li>
                         <li onClick={() => this.setState({count: 0})}>
-                            <Badge count={isLogin ? count : 0} overflowCount={this.props.counter.count}
+                            <Badge count={isLogin ? this.props.counter.count : 0} overflowCount={count}
                                    style={{marginRight: -17}}>
                                 <Icon type="notification"/>
                             </Badge>

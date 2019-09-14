@@ -17,7 +17,7 @@ class ReactForm extends ReactRequest {
     };
 }
 
-export class ReactBoxForm_antd extends ReactForm {
+export class ReactBoxFormAntd extends ReactForm {
     constructor(props) {
         super(props);
         this.state.showFlag = false;
@@ -114,7 +114,7 @@ export class ReactBoxForm_antd extends ReactForm {
     }
 }
 
-export class ReactBoxAddForm_antd extends ReactBoxForm_antd {
+export class ReactBoxAddForm_antd extends ReactBoxFormAntd {
     constructor(props) {
         super(props);
         this.boxConfig.title = "增加";
@@ -123,7 +123,7 @@ export class ReactBoxAddForm_antd extends ReactBoxForm_antd {
     }
 }
 
-export class ReactBoxEditForm_antd extends ReactBoxForm_antd {
+export class ReactBoxEditForm_antd extends ReactBoxFormAntd {
     constructor(props) {
         super(props);
         this.boxConfig.title = '修改';
