@@ -1,8 +1,8 @@
 import React from "react";
-import DataTable from "./dataTable";
+import Function_table from "./function_table";
 import ApiUrl from "@/api/apiurl";
 
-class Data extends React.Component {
+class FunctionData extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -21,10 +21,10 @@ class Data extends React.Component {
 
     render() {
         return (
-            <DataTable url={ApiUrl.DATA_SELECT} auto={false} funKey={this.state.funKey}>
-            </DataTable>
+            <Function_table url={ApiUrl.DATA_FUN.SELECT} auto={false} funKey={this.state.funKey}>
+            </Function_table>
         );
     }
 }
 
-export default Data;
+export default FunctionData;

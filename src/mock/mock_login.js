@@ -1,5 +1,4 @@
 import {getResultError, getResultSuccess} from './mock_response';
-import ApiUrl from '../api/apiurl';
 
 const LoginUsers = [
     {
@@ -39,7 +38,7 @@ export default {
         mock.onGet('/success').reply(200, getResultSuccess(null, 'success'));
         mock.onGet('/error').reply(500, getResultError(null, 'failure'));
 
-        mock.onGet(ApiUrl.GET_LOGININFO).reply(() => {
+        mock.onGet('/_mockjs/sys/getLoginInfo').reply(() => {
             return new Promise((resolve) => {
                 setTimeout(() => {
                     resolve([200, getResultSuccess(_userData, '请求成功')]);
@@ -47,7 +46,7 @@ export default {
             })
         });
 
-        mock.onPost(ApiUrl.LOGIN).reply(config => {
+        mock.onPost("/_mockjs/sys/login").reply(config => {
             let {userName, userPwd} = JSON.parse(config.data);
             return new Promise((resolve) => {
                 let user = null;
@@ -71,13 +70,13 @@ export default {
             });
         });
 
-        mock.onPost(ApiUrl.LOGOUT).reply(() => {
+        mock.onPost('/_mockjs/sys/logout').reply(() => {
             return new Promise((resolve) => {
                 resolve([200, getResultSuccess(null, '请求成功')]);
             })
         });
 
-        mock.onGet(ApiUrl.GET_COUNT).reply(() => {
+        mock.onGet('/_mockjs/sys/count').reply(() => {
             return new Promise((resolve) => {
                 setTimeout(() => {
                     resolve([200, getResultSuccess({count: 99}, '请求成功')]);

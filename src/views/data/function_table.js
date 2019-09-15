@@ -2,7 +2,7 @@ import React from "react";
 import {Spin, Table} from "antd";
 import {ReactTableList} from "../../compenents/ReactTableList";
 
-class DataTable extends ReactTableList {
+class FunctionTable extends ReactTableList {
     constructor(props) {
         super(props);
         this.setPostOperate();
@@ -60,6 +60,7 @@ class DataTable extends ReactTableList {
         if (data.pageInfo) {
             resultData.total = data.pageInfo.total;
             resultData.pageNum = data.pageInfo.pageNum;
+            resultData.pageSize = data.pageInfo.pageSize;
         }
 
         return resultData;
@@ -86,4 +87,4 @@ class DataTable extends ReactTableList {
     }
 }
 
-export default DataTable;
+export default FunctionTable;

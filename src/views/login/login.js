@@ -98,7 +98,7 @@ class Login extends React.Component {
         };
 
         this.setState({loading: true});
-        Api.postUrl(Api.Url.LOGIN, loginParams).then(res => {
+        Api.postUrl(Api.Url.USER.LOGIN, loginParams).then(res => {
             this.setState({loading: false});
             if ((res.data)) {
                 Session.saveSession(res.data);

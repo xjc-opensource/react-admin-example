@@ -47,7 +47,7 @@ class Main extends React.Component {
             let reqObj = {};
             reqObj.userId = userParams.userId;
             reqObj.token = userParams.token;
-            Api.postUrl(Api.Url.LOGOUT, reqObj).then(() => {
+            Api.postUrl(Api.Url.USER.LOGOUT, reqObj).then(() => {
                 Session.deleteSession();
                 this.props.history.push('/login');
             }, () => {

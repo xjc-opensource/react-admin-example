@@ -3,8 +3,12 @@ import Api from '@/api/api';
 
 export const get = () => {
     return dispatch => {
-        return Api.getUrl(Api.Url.GET_COUNT).then((res) => {
-            dispatch(set(res.data.count));
+        return Api.getUrl(Api.Url.USER.GET_COUNT).then((res) => {
+            let count  = res.data;
+            if (res.data.count) {
+                count = res.data.count;
+            }
+            dispatch(set(count));
             return res;
         }, (err) => {
             dispatch(set(0));

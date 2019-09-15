@@ -66,8 +66,15 @@ export class ReactTableList extends ReactRequest {
         if (resultData.total) {
             setData.total = resultData.total;
         }
+        if (resultData.pageSize) {
+            setData.pageSize = resultData.pageSize;
+        }
         if (resultData.pageNum) {
             setData.current = resultData.pageNum;
+        }
+
+        if (resultData.rowKey) {
+            this.reqData.rowKey = resultData.rowKey;
         }
 
         this.setState(setData);

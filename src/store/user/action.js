@@ -7,7 +7,7 @@ export const get = (menuList) => {
     return dispatch  => {
       //  dispatch(setUserMenu(menuList));
         dispatch(setUserLoading(true));
-        return Api.getUrl(Api.Url.GET_LOGININFO).then((res) => {
+        return Api.getUrl(Api.Url.USER.LOGININFO).then((res) => {
             dispatch(setUserLoading(false));
             if ((res) && (res.data)) {
                 console.log("user data:", res.data);

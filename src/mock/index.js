@@ -18,11 +18,4 @@ if (GlobalEnvParams.MOCK_DATA) {
     }
 
     mock.onAny().passThrough();
-   /* mock.onPost().reply(function(config) {
-        alert("xxx:" +  config.url);
-    /!*    return axios.get('/bar');*!/
-    })
-*/
-   //mock.restore();
-   // mock.resetHandlers();
 }
