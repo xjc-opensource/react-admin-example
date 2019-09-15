@@ -1,13 +1,17 @@
-import { message } from 'antd';
+import Message from '../core/message';
 import { GlobalEnvParams } from '../core/envconfig';
 import Session from '../core/session';
 
 function getApiRoot() {
-    return GlobalEnvParams.API_ROOT;
+    if (GlobalEnvParams.MOCK_DATA) {
+        return "";
+    } else {
+        return GlobalEnvParams.API_ROOT;
+    }
 }
 
 function showErrorMessage(msg) {
-    message.error(msg);
+    Message.error(msg);
 }
 
 function getResponseCodeString(code) {

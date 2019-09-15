@@ -3,7 +3,8 @@ const ApiUrl = {
     ,LOGOUT: '/sys/logout'
     ,GET_LOGININFO: '/sys/getLoginInfo'
     ,MODIFY_PASSWORD: '/sys/modpwassword'
-    ,GET_COUNT: '/commmon/count'
+    ,GET_COUNT: '/sys/count'
+    ,DATA_SELECT: '/data/select'
 };
 
 export default ApiUrl;

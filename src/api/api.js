@@ -5,7 +5,7 @@ import ApiUrl from '../api/apiurl';
 
 axios.defaults.timeout = 60 * 1000; //响应时间
 //axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'; //配置请求头
-//axios.defaults.baseURL = base;   //配置接口地址
+//axios.defaults.baseURL;   //配置接口地址
 let CancelToken = axios.CancelToken;
 
 function getApiUrl(path) {

@@ -1,10 +1,10 @@
 import {DatePicker, Form, Input} from "antd";
-import ReactTable_antd from "@/compenents/ReactTable_antd";
+import ReactTableAntd from "@/compenents/ReactTable_antd";
 import React from "react";
-import {ReactBoxAddForm_antd, ReactBoxEditForm_antd, ReactQueryForm_antd} from "@/compenents/ReactForm_antd";
+import {ReactBoxAddFormAntd, ReactBoxEditFormAntd, ReactQueryFormAntd} from "@/compenents/ReactForm_antd";
 
 @Form.create()
-class DemoTableAddForm extends ReactBoxAddForm_antd {
+class DemoTableAddForm extends ReactBoxAddFormAntd {
     getRequestParam(fieldsValue) {
         return {
             name: fieldsValue.name
@@ -40,7 +40,7 @@ class DemoTableAddForm extends ReactBoxAddForm_antd {
 }
 
 @Form.create()
-class DemoTableEditForm extends ReactBoxEditForm_antd {
+class DemoTableEditForm extends ReactBoxEditFormAntd {
     getRequestParam(fieldsValue) {
         return {
             name: fieldsValue.name
@@ -78,7 +78,7 @@ class DemoTableEditForm extends ReactBoxEditForm_antd {
 
 
 @Form.create()
-class DemoTableQueryForm extends ReactQueryForm_antd {
+class DemoTableQueryForm extends ReactQueryFormAntd {
     getRequestParam(fieldsValue) {
         return {
             name: fieldsValue.name
@@ -105,7 +105,7 @@ class DemoTableQueryForm extends ReactQueryForm_antd {
 }
 
 
-class DemoTable extends ReactTable_antd {
+class DemoTable extends ReactTableAntd {
     constructor(props) {
         super(props);
 

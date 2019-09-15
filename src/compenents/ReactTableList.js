@@ -16,25 +16,29 @@ export class ReactTableList extends ReactRequest {
 
     reqData = {
         reqParams: {
-            page: 1,
+            pageNum: 1,
             pageSize: 10,
         },
         delUrl: '',
         rowKey: 'id'
     };
 
-    requestListPageData(page, pageSize){
-        if (page) {
-            this.reqData.reqParams.page = page;
+    setPageNum(pageNum) {
+        this.reqData.reqParams.pageNum = pageNum;
+    }
+
+    requestListPageData(pageNum, pageSize, queryParam){
+        if (pageNum) {
+            this.setPageNum(pageNum);
         }
         if (pageSize) {
             this.reqData.reqParams.pageSize = pageSize;
         }
-        this.requestListData();
+        this.requestListData(queryParam);
     }
 
     requestQueryData(queryParam) {
-        this.reqData.reqParams.page = 1;
+        this.setPageNum(1);
         this.requestListData(queryParam);
     }
 
@@ -44,12 +48,33 @@ export class ReactTableList extends ReactRequest {
             Object.assign(queryParam, params);
         }
 
+        console.log("params:", queryParam);
+
         this.requestData(queryParam);
     }
 
     processResponseData(data) {
         super.processResponseData(data);
-        this.setState({total: data.total, dataList: data.list, current: data.page});
+        let resultData = this.processCustomResultData(data);
+        let  setData = {};
+        if (resultData.list) {
+            setData.dataList = resultData.list;
+        }
+        if (resultData.columns) {
+            setData.columns = resultData.columns;
+        }
+        if (resultData.total) {
+            setData.total = resultData.total;
+        }
+        if (resultData.pageNum) {
+            setData.current = resultData.pageNum;
+        }
+
+        this.setState(setData);
+    }
+
+    processCustomResultData(data) {
+        return data;
     }
 
     componentDidMount() {

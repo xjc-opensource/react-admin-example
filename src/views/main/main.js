@@ -2,6 +2,7 @@ import React from "react";
 import {Layout, Spin} from "antd";
 import Session from '@/core/session';
 import Api from '@/api/api';
+import Message from '@/core/message';
 import './main.css';
 import CustomHeader  from './customheader';
 import CustomMenu from "./custommenu";
@@ -10,6 +11,7 @@ import Router from '@/router/router'
 import {connect} from "react-redux";
 import * as UserAction  from '@/store/user/action.js'
 import {withRouter} from 'react-router-dom'
+
 
 const {Sider, Header, Content, Footer} = Layout;
 
@@ -49,9 +51,11 @@ class Main extends React.Component {
                 Session.deleteSession();
                 this.props.history.push('/login');
             }, () => {
-                this.$message({
+                Message.showErrorMessage("退出登录失败");
+
+              /*  message({
                     type: 'error', message: '退出登录失败'
-                });
+                });*/
             })
         }
     }

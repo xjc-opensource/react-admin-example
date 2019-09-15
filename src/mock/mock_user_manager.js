@@ -22,18 +22,18 @@ export default {
 
         //获取用户列表（分页）
         mock.onGet('/user/listpage').reply(config => {
-            let {page, name, pageSize} = config.params;
+            let {pageNum, name, pageSize} = config.params;
             let mockUsers = _Users.filter(user => {
                 if (name && user.name.indexOf(name) === -1) return false;
                 return true;
             });
             let total = mockUsers.length;
-            mockUsers = mockUsers.filter((u, index) => index < pageSize * page && index >= pageSize * (page - 1));
+            mockUsers = mockUsers.filter((u, index) => index < pageSize * pageNum && index >= pageSize * (pageNum - 1));
             return new Promise((resolve) => {
                 setTimeout(() => {
                     resolve([200, getResultSuccess({
                         total: total,
-                        page: page,
+                        pageNum: pageNum,
                         pageSize: pageSize,
                         list: mockUsers
                     })]);

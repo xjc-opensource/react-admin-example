@@ -37,7 +37,7 @@ class Demotablesimple extends React.Component {
             },
         ];
 
-
+        const xx = (text, record, index) =>  <span>{finddata(text.value, text.list)}</span>;
         const columns = [
             {
                 title: '姓名',
@@ -49,7 +49,7 @@ class Demotablesimple extends React.Component {
                 title: '年龄',
                 dataIndex: 'age',
                 key: 'age',
-                render: (text, record, index) =>  <span>{finddata(text.value, text.list)}</span>,
+                render: xx,
             },
             {
                 title: '住址',

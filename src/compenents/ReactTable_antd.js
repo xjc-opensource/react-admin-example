@@ -3,7 +3,7 @@ import {ReactTableListAntd} from './ReactTableList_antd';
 import {Button, Divider, Modal, Spin} from 'antd';
 import {ReactTable} from './ReactTable';
 
-export class ReactTable_antd extends ReactTable {
+export class ReactTableAntd extends ReactTable {
     constructor(props) {
         super(props);
         this.tableConfig.tableListElement = ReactTableListAntd;
@@ -52,4 +52,4 @@ export class ReactTable_antd extends ReactTable {
     }
 }
 
-export default ReactTable_antd;
+export default ReactTableAntd;

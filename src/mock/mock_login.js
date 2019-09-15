@@ -15,20 +15,21 @@ const LoginUsers = [
 
 let UserData = {
     baseInfo: null,
-    menuList: [        {
-        "groupName": "基本配置",
-        "code": "fun_x_02",
-        "name": "x_02",
-        "groupIndex": 1
-    },
+    menuList: [
         {
             "groupName": "基本配置",
-            "code": "fun_x_t_goods_type",
-            "name": "x_t_goods_type",
+            "code": "fun_x_01",
+            "name": "x_01",
+            "groupIndex": 1
+        },
+        {
+            "groupName": "基本配置",
+            "code": "fun_x_02",
+            "name": "x_02",
             "groupIndex": 1
         }
-        ],
-    count:61,
+    ],
+    count: 61,
 }
 
 export default {
@@ -38,7 +39,7 @@ export default {
         mock.onGet('/success').reply(200, getResultSuccess(null, 'success'));
         mock.onGet('/error').reply(500, getResultError(null, 'failure'));
 
-        mock.onGet(ApiUrl.GET_LOGININFO).reply(()=> {
+        mock.onGet(ApiUrl.GET_LOGININFO).reply(() => {
             return new Promise((resolve) => {
                 setTimeout(() => {
                     resolve([200, getResultSuccess(_userData, '请求成功')]);
@@ -73,6 +74,14 @@ export default {
         mock.onPost(ApiUrl.LOGOUT).reply(() => {
             return new Promise((resolve) => {
                 resolve([200, getResultSuccess(null, '请求成功')]);
+            })
+        });
+
+        mock.onGet(ApiUrl.GET_COUNT).reply(() => {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve([200, getResultSuccess({count: 99}, '请求成功')]);
+                }, 5000);
             })
         });
     }

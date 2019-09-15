@@ -114,7 +114,7 @@ export class ReactBoxFormAntd extends ReactForm {
     }
 }
 
-export class ReactBoxAddForm_antd extends ReactBoxFormAntd {
+export class ReactBoxAddFormAntd extends ReactBoxFormAntd {
     constructor(props) {
         super(props);
         this.boxConfig.title = "增加";
@@ -123,7 +123,7 @@ export class ReactBoxAddForm_antd extends ReactBoxFormAntd {
     }
 }
 
-export class ReactBoxEditForm_antd extends ReactBoxFormAntd {
+export class ReactBoxEditFormAntd extends ReactBoxFormAntd {
     constructor(props) {
         super(props);
         this.boxConfig.title = '修改';
@@ -132,7 +132,7 @@ export class ReactBoxEditForm_antd extends ReactBoxFormAntd {
 }
 
 
-export class ReactQueryForm_antd extends ReactForm {
+export class ReactQueryFormAntd extends ReactForm {
     handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFields((err, fieldsValue) => {

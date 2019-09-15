@@ -10,6 +10,7 @@ let initEnvParam = {
     ,TEST_PASSWORD: ""
     ,TEST_CAPRCHA: ""
     ,DEMO_MENU: false
+    ,MOCK_DATA: false
     ,MOCK_LOGIN: false
     ,MOCK_DEMO_USER: false
     ,DEMO_MQTT: false
@@ -20,11 +21,12 @@ if (target === 'development') {
     //开发
     envParams = {
         ENV_TITLE: "dev"
-        ,API_ROOT: ""
+        ,API_ROOT: "http://127.0.0.1:6300/opensource-web910/api/v1"
         ,TEST_USERNAME: "admin"
         ,TEST_PASSWORD: "123456"
         ,TEST_CAPRCHA: "666666"
         ,DEMO_MENU: true
+        ,MOCK_DATA: true
         ,MOCK_LOGIN: true
         ,MOCK_DEMO_USER: true
     }
@@ -43,6 +45,7 @@ if (target === 'development') {
         ,TEST_PASSWORD: ""
         ,TEST_CAPRCHA: ""
         ,DEMO_MENU: false
+        ,MOCK_DATA: false
         ,MOCK_LOGIN: false
         ,MOCK_DEMO_USER: false
     }
@@ -55,6 +58,7 @@ if (target === 'development') {
         ,TEST_PASSWORD: "123456"
         ,TEST_CAPRCHA: "666666"
         ,DEMO_MENU: true
+        ,MOCK_DATA: true
         ,MOCK_LOGIN: true
         ,MOCK_DEMO_USER: true
     };
@@ -67,6 +71,7 @@ if (target === 'development') {
         ,TEST_PASSWORD: "123456"
         ,TEST_CAPRCHA: "666666"
         ,DEMO_MENU: true
+        ,MOCK_DATA: true
         ,MOCK_LOGIN: true
         ,MOCK_DEMO_USER: true
     }

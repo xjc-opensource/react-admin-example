@@ -30,6 +30,7 @@ export const get = (menuList) => {
                             parnetMenu = {
                                 key: '/fun_' + menuObj.groupIndex,
                                 title: menuObj.groupName,
+                                icon: 'laptop',
                                 subs: []
                             }
                             menuList.push(parnetMenu);
@@ -37,7 +38,7 @@ export const get = (menuList) => {
 
                         let newMenu = {
                             key:  parnetMenu.key +   '/' + menuObj.code,
-                            linkPath: '/demo/tablesimple?action=' + menuObj.code,
+                            linkPath: '/common/data?action=' + menuObj.code,
                             title: menuObj.name,
                         }
                         parnetMenu.subs.push(newMenu);

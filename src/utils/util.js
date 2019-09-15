@@ -7,8 +7,11 @@ export function getCookie(name, defaultValue) {
         return defaultValue;
 }
 
-export function getQueryStringByName(name) {
+export function getQueryStringByName(name, search ) {
     let path = window.location.search;
+    if (search) {
+        path = search;
+    }
     if (path === "") {
         if (window.location.hash.indexOf("?") > 0) {
             path = "?" + window.location.hash.split("?")[1];
