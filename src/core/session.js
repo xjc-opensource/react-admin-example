@@ -17,6 +17,15 @@ function getSessionData() {
     }
 }
 
+function getSessionDispalyName() {
+    let userInfo = getSessionData();
+    if (userInfo.aliasname) {
+        return userInfo.aliasname;
+    } else {
+        return userInfo.username;
+    }
+}
+
 function isAuthSession() {
     let user = JSON.parse(sessionStorage.getItem('user'));
     if (user) {
@@ -43,6 +52,7 @@ export default(
         getSessionToken,
         getSessionData,
         getSessionMenuList,
+        getSessionDispalyName,
         isAuthSession,
         saveSession,
         deleteSession

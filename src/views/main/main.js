@@ -2,7 +2,7 @@ import React from "react";
 import {Layout, Spin} from "antd";
 import Session from '@/core/session';
 import Api from '@/api/api';
-import Message from '@/core/message';
+import MessageBox from '@/core/message';
 import './main.css';
 import CustomHeader  from './customheader';
 import CustomMenu from "./custommenu";
@@ -47,16 +47,20 @@ class Main extends React.Component {
             let reqObj = {};
             reqObj.userId = userParams.userId;
             reqObj.token = userParams.token;
-            Api.postUrl(Api.Url.USER.LOGOUT, reqObj).then(() => {
-                Session.deleteSession();
-                this.props.history.push('/login');
-            }, () => {
-                Message.showErrorMessage("退出登录失败");
+            if (MessageBox.showLoadingMessage("正在退出登录")) {
+                Api.postUrl(Api.Url.USER.LOGOUT, reqObj).then(() => {
+                    MessageBox.closeLoadingMessage();
+                    Session.deleteSession();
+                    this.props.history.push('/login');
+                }, () => {
+                    MessageBox.closeLoadingMessage();
+                    MessageBox.showErrorMessage("退出登录失败");
 
-              /*  message({
-                    type: 'error', message: '退出登录失败'
-                });*/
-            })
+                    /*  message({
+                          type: 'error', message: '退出登录失败'
+                      });*/
+                })
+            }
         }
     }
 

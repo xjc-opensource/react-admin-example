@@ -24,6 +24,7 @@ export class ReactTableList extends ReactRequest {
     };
 
     setPageNum(pageNum) {
+        //this.setState({current: pageNum});
         this.reqData.reqParams.pageNum = pageNum;
     }
 

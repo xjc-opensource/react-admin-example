@@ -53,7 +53,7 @@ class Customheader extends React.Component {
         const {icon, count} = this.state;
         const {collapsed, location} = this.props;
         const isLogin = Session.isAuthSession();
-        const userName = Session.getSessionData().userName;
+        const username = Session.getSessionDispalyName();
         const notLogin = (
             <div>
                 <Link to={{pathname: '/login', state: {from: location}}}
@@ -65,6 +65,7 @@ class Customheader extends React.Component {
         const menu = (
             <div>
                 <Menu>
+                    <Menu.Divider/>
                     <Menu.Item key="2">
                         修改密码
                     </Menu.Item>
@@ -78,7 +79,7 @@ class Customheader extends React.Component {
             <div>
                 <Dropdown overlay={menu} trigger={['click']}>
                     <div>
-                        <span>{userName}</span>
+                        <span>{username}</span>
                         <Avatar icon="user" shape="square"/>
                         <Icon type="down"/>
                     </div>

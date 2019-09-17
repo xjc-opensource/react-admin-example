@@ -4,6 +4,7 @@ import Md5 from 'js-md5';
 import Api from '../../api/api';
 import Session from '../../core/session';
 import './login.scss';
+import MessageBox from '../../core/message';
 
 @Form.create()
 class NormalLoginForm extends React.Component {
@@ -32,6 +33,7 @@ class NormalLoginForm extends React.Component {
                         <Input
                             prefix={<Icon type="user" style={{color: 'rgba(0,0,0,.25)'}}/>}
                             placeholder="Username"
+                            autoComplete=""
                         />,
                     )}
                 </Form.Item>
@@ -44,6 +46,7 @@ class NormalLoginForm extends React.Component {
                             prefix={<Icon type="lock" style={{color: 'rgba(0,0,0,.25)'}}/>}
                             type="password"
                             placeholder="Password"
+                            autoComplete=""
                         />,
                     )}
                 </Form.Item>
@@ -91,19 +94,25 @@ class Login extends React.Component {
 
     loginEvent(data) {
         let loginParams = {
-            userName: data.username,
-            userPwd: Md5(data.userpassword),
+            username: data.username,
+            password: Md5(data.userpassword),
             uuid: '',
-            captcha: ''
+            captcha: '',
+            loginFlag: 1,
         };
 
         this.setState({loading: true});
         Api.postUrl(Api.Url.USER.LOGIN, loginParams).then(res => {
             this.setState({loading: false});
             if ((res.data)) {
-                Session.saveSession(res.data);
-                // const {from} = this.props.location.state || {from: {pathname: '/'}}
-                this.props.history.push('/');
+
+                if (1 === res.data.loginResultFlag ) {
+                    Session.saveSession(res.data);
+                    this.props.history.push('/');
+                } else {
+                    MessageBox.showErrorMessage("error:" + res.data.loginResultFlag);
+                    console.log("data:", res.data);
+                }
             }
             this.getCaptcha();
         }, () => {

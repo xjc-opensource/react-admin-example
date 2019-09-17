@@ -1,28 +1,35 @@
 import React from "react";
-import Function_table from "./function_table";
+import FunctionTable from "./function_table";
 import ApiUrl from "@/api/apiurl";
 
 class FunctionData extends React.Component {
     constructor(props) {
         super(props);
-    }
-    state = {
-        funKey: ""
+        this.state = {
+            funKey: ''
+        }
     }
 
+    componentDidMount() {
+        this.requestData();
+    }
     componentWillReceiveProps(nextProps) {
+        this.requestData();
+    }
+
+    requestData () {
         let funKey = this.GlobalUtil.getQueryStringByName("action");
         console.log("componentWillReceiveProps funKey:", funKey);
 
         this.setState({
             funKey: funKey
-        })
+        });
     }
 
     render() {
         return (
-            <Function_table url={ApiUrl.DATA_FUN.SELECT} auto={false} funKey={this.state.funKey}>
-            </Function_table>
+            <FunctionTable url={ApiUrl.DATA_FUN.SELECT} auto={false} funKey={this.state.funKey}>
+            </FunctionTable>
         );
     }
 }

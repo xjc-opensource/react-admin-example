@@ -32,6 +32,8 @@ axios.interceptors.request.use(
     config => {
         config.headers['x-access-token'] = getUserToken();
         config.headers['x-access-type'] = 'web';
+        config.headers['x-access-systemCode'] = '1';
+        config.headers['x-access-loginFlag'] = '1';
         return config;
     },
     err => {

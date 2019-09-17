@@ -6,6 +6,7 @@ class FunctionTable extends ReactTableList {
     constructor(props) {
         super(props);
         this.setPostOperate();
+        this.params.funKey = props.funKey;
     }
 
     params = {
@@ -25,8 +26,12 @@ class FunctionTable extends ReactTableList {
 
    componentWillReceiveProps(nextProps) {
         console.log("data funKey:", nextProps.funKey);
-        if ((this.props.funKey) && (nextProps.funKey.length >0)) {
+        if ((nextProps.funKey) && (nextProps.funKey.length >0)) {
             this.params.funKey = nextProps.funKey;
+            this.setPageNum(1);
+            this.requestListData(this.params);
+        } else {
+            this.params.funKey = this.props.funKey;
             this.setPageNum(1);
             this.requestListData(this.params);
         }

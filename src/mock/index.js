@@ -7,7 +7,7 @@ import {GlobalEnvParams} from '../core/envconfig'
 
 if (GlobalEnvParams.MOCK_DATA) {
     axios.defaults.baseURL = GlobalEnvParams.API_ROOT;
-    let mock = new MockAdapter(axios);
+    let mock = new MockAdapter(axios, {delayResponse: 500});
 
     if (GlobalEnvParams.MOCK_LOGIN) {
         mock_login.bootstrap(mock);

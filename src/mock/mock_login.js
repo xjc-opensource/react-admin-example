@@ -4,11 +4,12 @@ const LoginUsers = [
     {
         id: 1
         , userId: 1
-        , userName: 'admin'
+        , username: 'admin'
         , password: 'e10adc3949ba59abbe56e057f20f883e'
         , avatar: ''
-        , name: 'mockjs'
+        , aliasname: 'mockjs'
         , token: 'xx'
+        , loginResultFlag: 1
     }
 ];
 
@@ -47,12 +48,12 @@ export default {
         });
 
         mock.onPost("/_mockjs/sys/login").reply(config => {
-            let {userName, userPwd} = JSON.parse(config.data);
+            let {username, password} = JSON.parse(config.data);
             return new Promise((resolve) => {
                 let user = null;
                 setTimeout(() => {
                         let hasUser = LoginUsers.some(u => {
-                            if (u.userName === userName && u.password === userPwd) {
+                            if (u.username === username && u.password === password) {
                                 user = JSON.parse(JSON.stringify(u));
                                 user.password = undefined;
                                 return true;
