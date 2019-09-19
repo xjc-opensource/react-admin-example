@@ -100,7 +100,7 @@ class Main extends React.Component {
                     <Layout>
                         <Header className="header">
                             <CustomHeader collapsed={this.state.collapsed} onToggle={this.toggle}
-                                    logout={this.loginOut.bind(this)}/>
+                                    logout={this.loginOut.bind(this)} />
                         </Header>
                         <Content className="mainContent">
                             <div style={{padding: 16, position: 'relative'}}>

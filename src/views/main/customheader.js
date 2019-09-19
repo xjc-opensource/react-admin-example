@@ -9,12 +9,18 @@ import {connect} from 'react-redux'
 //withRouter一定要写在前面，不然路由变化不会反映到props中去
 @withRouter
 @connect(
-    state => ({
+    (state, ownProps) => ({
         counter: state.counter
     }),
     {getCount: CounterAction.get}
 )
 class Customheader extends React.Component {
+
+    constructor(props) {
+        super(props);
+       // Object.assign(this.props,{} , {xx:"counter"});
+
+    }
     state = {
         icon: 'arrows-alt',
         count: 10000,

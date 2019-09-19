@@ -1,21 +1,6 @@
 import React from "react";
 import {Button, Form, Modal, Spin} from "antd";
-import {ReactRequest} from "./ReactRequest";
-
-class ReactForm extends ReactRequest {
-    componentDidMount() {
-        if (this.props.onRef) {
-            this.props.onRef(this);
-        }
-    }
-
-    itemContentElement = ()=>  {
-    };
-
-    getRequestParam(fieldsValue) {
-        return {};
-    };
-}
+import {ReactForm} from "./ReactForm";
 
 export class ReactBoxFormAntd extends ReactForm {
     constructor(props) {
@@ -83,7 +68,6 @@ export class ReactBoxFormAntd extends ReactForm {
         return (
             <span className="tableform">
                 {this.showElement}
-
                 <Modal
                     title={boxConfig.title}
                     visible={this.state.showFlag}
@@ -128,6 +112,14 @@ export class ReactBoxEditFormAntd extends ReactBoxFormAntd {
         super(props);
         this.boxConfig.title = '修改';
         //this.showElement = <Button type='link' onClick={this.handleOpenShow}><u>修改</u></Button>;
+    }
+}
+
+export class ReactBoxQueryFormAntd extends ReactBoxFormAntd {
+    constructor(props) {
+        super(props);
+        this.boxConfig.title = '查询';
+        this.showElement = <Button type='inline' onClick={this.handleOpenShow}>查询</Button>;
     }
 }
 

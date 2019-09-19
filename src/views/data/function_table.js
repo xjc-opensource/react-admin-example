@@ -24,6 +24,10 @@ class FunctionTable extends ReactTableList {
         this.requestListData(this.params);
     }
 
+    refreshTable = () => {
+        this.requestListData(this.params);
+    }
+
    componentWillReceiveProps(nextProps) {
         console.log("data funKey:", nextProps.funKey);
         if ((nextProps.funKey) && (nextProps.funKey.length >0)) {
@@ -51,6 +55,7 @@ class FunctionTable extends ReactTableList {
                     title: fieldsObj.fieldDesc,
                     dataIndex:fieldsObj.fieldName,
                     key: fieldsObj.fieldName,
+                    width: fieldsObj.width,
                 };
 
                 columnsItem.render = textRender;

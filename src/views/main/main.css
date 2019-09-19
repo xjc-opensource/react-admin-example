@@ -69,6 +69,15 @@
     z-index: 100;
 }
 
+.functionBotton {
+	border:0px solid red;
+    display: flow;
+    padding-bottom: 4px;
+    position: relative;
+    float: right;
+    z-index: 100;
+}
+
 .queryform {
 /*    background: #61dafb;
     color: #FFFFFF;*/

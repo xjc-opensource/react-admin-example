@@ -28,6 +28,22 @@ export function getQueryStringByName(name, search ) {
     return context == null || context === "" || context === "undefined" ? "" : context;
 }
 
+
+export function convertToUrlParams(data) {
+    let _result = [];
+    for (let key in data) {
+        var value = data[key];
+        if (value.constructor == Array) {
+            value.forEach(function(_value) {
+                _result.push(key + "=" + _value);
+            });
+        } else {
+            _result.push(key + '=' + value);
+        }
+    }
+    return _result.join('&');
+}
+
 export function getUUID () {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
         return (c === 'x' ? (Math.random() * 16 | 0) : ('r&0x3' | '0x8')).toString(16)

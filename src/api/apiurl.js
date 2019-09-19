@@ -10,6 +10,14 @@ let ApiUrl = {
     },
     DATA_FUN: {
         SELECT: '/datafunction/select',
+        QUERY_FIELDS: '/datafunction/queryFields',
+        QUERY_CMMIT: '/datafunction/queryCmmit',
+        ADD_FIELDS: '/datafunction/addFields',
+        ADD_CMMIT: '',
+        UPDATE_FIELDS: '/datafunction/updateFields',
+        UPDATE_CMMIT: '',
+        IMPORT_FIELDS: '/datafunction/importFields',
+        IMPORT_CMMIT: '',
     },
 };
 
@@ -23,6 +31,18 @@ if (GlobalEnvParams.MOCK_DATA) {
             GET_COUNT: '/_mockjs/sys/count',
         })
     }
+
+    Object.assign(ApiUrl.DATA_FUN, {
+       // SELECT: '/datafunction/select',
+       // QUERY_FIELDS: '/_mockjs/datafunction/queryFields',
+       // QUERY_CMMIT: '/datafunction/queryCmmit',
+       // ADD_FIELDS: '/datafunction/addFields',
+       // ADD_CMMIT: '',
+       // UPDATE_FIELDS: '/datafunction/updateFields',
+       // UPDATE_CMMIT: '',
+       // IMPORT_FIELDS: '/datafunction/importFields',
+       // IMPORT_CMMIT: '',
+    })
 }
 
 export default ApiUrl;
