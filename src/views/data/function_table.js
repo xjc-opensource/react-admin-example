@@ -28,9 +28,9 @@ class FunctionTable extends ReactTableList {
         this.requestListData(this.params);
     }
 
-   componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
         console.log("data funKey:", nextProps.funKey);
-        if ((nextProps.funKey) && (nextProps.funKey.length >0)) {
+        if ((nextProps.funKey) && (nextProps.funKey.length > 0)) {
             this.params.funKey = nextProps.funKey;
             this.setPageNum(1);
             this.requestListData(this.params);
@@ -42,18 +42,17 @@ class FunctionTable extends ReactTableList {
     }
 
     processCustomResultData(data) {
-        let resultData = {
-        };
+        let resultData = {};
 
         if (data.fieldListInfo) {
             let columns = [];
-            const textRender = (text, record, index) =>  <span>{text}</span>;
+            const textRender = (text, record, index) => <span>{text}</span>;
 
-            for(let index in data.fieldListInfo) {
+            for (let index in data.fieldListInfo) {
                 const fieldsObj = data.fieldListInfo[index];
                 let columnsItem = {
                     title: fieldsObj.fieldDesc,
-                    dataIndex:fieldsObj.fieldName,
+                    dataIndex: fieldsObj.fieldName,
                     key: fieldsObj.fieldName,
                     width: fieldsObj.width,
                 };
@@ -64,7 +63,7 @@ class FunctionTable extends ReactTableList {
             resultData.columns = columns;
         }
         if (data.dataList) {
-            resultData.list =  data.dataList;
+            resultData.list = data.dataList;
         }
 
         if (data.pageInfo) {
@@ -80,16 +79,23 @@ class FunctionTable extends ReactTableList {
         return (
             <div>
                 <Spin spinning={this.state.loading} tip='数据加载中...'>
-                    <Table columns={this.state.columns} dataSource={this.state.dataList} rowKey={this.reqData.rowKey}
-                           pagination={{
-                               pageSizeOptions: ['10', '20', '30'],
-                               showSizeChanger: true,
-                               onChange: this.onChange.bind(this),
-                               onShowSizeChange: this.onShowSizeChange.bind(this),
-                               current: this.state.current,
-                               total: this.state.total,
-                               pageSize: this.state.pageSize,
-                           }}>
+                    <Table
+                        className={"functionTable"}
+                        columns={this.state.columns}
+                        dataSource={this.state.dataList}
+                        rowKey={this.reqData.rowKey}
+                        size={'small'}
+                        scroll={{y: 600}}
+                        useFixedHeader = {true}
+                        pagination={{
+                            pageSizeOptions: ['10', '20', '30'],
+                            showSizeChanger: true,
+                            onChange: this.onChange.bind(this),
+                            onShowSizeChange: this.onShowSizeChange.bind(this),
+                            current: this.state.current,
+                            total: this.state.total,
+                            pageSize: this.state.pageSize,
+                        }}>
                     </Table>
                 </Spin>
             </div>

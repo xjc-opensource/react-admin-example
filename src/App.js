@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './App.scss';
 import './mock/index';
-import './utils/dateutil';
+import './utils/type_extrend_util';
 import  * as GlobalUtil from './utils/util';
 import {GlobalEnvParams} from './core/envconfig';
 import {BrowserRouter, HashRouter, Route, Switch} from 'react-router-dom';

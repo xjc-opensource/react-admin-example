@@ -99,11 +99,18 @@ export class FunctionReactBoxFormAntd extends ReactForm {
 
     processResponseData(data) {
         console.log("processResponseData:", data);
-        if ((data.cmmitResult) && (data.cmmitResult.cmmitFlag === 1)) {
-            this.handleEnd();
-            this.setState({showFlag: false});
-        } else {
-            //出错处理
+        if (data.cmmitResult) {
+            if (data.cmmitResult.cmmitFlag === 1) {
+                this.handleEnd();
+                this.setState({showFlag: false});
+            } else {
+                let fieldMsg = "";
+                if (data.cmmitResult.fieldErrorResult) {
+                    let fieldErrorResult = data.cmmitResult.fieldErrorResult[0];
+                    fieldMsg = "{0}-{1}-{2}".format(fieldErrorResult.error, fieldErrorResult.fieldCode, fieldErrorResult.fieldDesc);
+                }
+                alert("error:" + data.cmmitResult.cmmitFlag + ":" + fieldMsg);
+            }
         }
     }
 
@@ -185,22 +192,37 @@ class Child extends React.Component {
 
     getComponent = () => {
         let fieldObj = this.props.data;
-
+        let {mustHaveValue, fieldCode,fieldDesc, dataValue, inputHint} = this.props.data;
         if (fieldObj.fieldType === 1) {
-            return <Form.Item label={fieldObj.fieldCode}>
+            return <Form.Item label={fieldDesc}>
                 {this.getLinkCompoent(fieldObj)}
-                {this.props.getFieldDecorator(fieldObj.fieldCode, {initialValue: fieldObj.dataValue})(
+                {this.props.getFieldDecorator(fieldCode, {initialValue: dataValue,
+                 /*   rules: [
+                        {
+                            required: mustHaveValue,
+                            message: fieldDesc + "必填",
+                        },
+                    ]*/
+                })(
                     <Input  style={{ width: '80%' }}
-                        placeholder={fieldObj.fieldDesc}
+                        placeholder={inputHint}
                     />
                 )}
             </Form.Item>;
         } else {
-            return <Form.Item label={this.props.data.fieldCode}>
-                {this.props.getFieldDecorator('myname' + this.props.data.fieldCode, {})(
-                    <Input
-                        placeholder={this.props.data.fieldDesc}
-                    />,
+            return <Form.Item label={fieldDesc}>
+                {this.getLinkCompoent(fieldObj)}
+                {this.props.getFieldDecorator(fieldCode, {initialValue: dataValue,
+                    /*   rules: [
+                           {
+                               required: mustHaveValue,
+                               message: fieldDesc + "必填",
+                           },
+                       ]*/
+                })(
+                    <Input  style={{ width: '80%' }}
+                            placeholder={inputHint}
+                    />
                 )}
             </Form.Item>;
         }

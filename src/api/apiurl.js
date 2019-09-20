@@ -13,11 +13,11 @@ let ApiUrl = {
         QUERY_FIELDS: '/datafunction/queryFields',
         QUERY_CMMIT: '/datafunction/queryCmmit',
         ADD_FIELDS: '/datafunction/addFields',
-        ADD_CMMIT: '',
+        ADD_CMMIT: '/datafunction/addCmmit',
         UPDATE_FIELDS: '/datafunction/updateFields',
-        UPDATE_CMMIT: '',
+        UPDATE_CMMIT: '/datafunction/updateCmmit',
         IMPORT_FIELDS: '/datafunction/importFields',
-        IMPORT_CMMIT: '',
+        IMPORT_CMMIT: '/datafunction/importCmmit',
     },
 };
 

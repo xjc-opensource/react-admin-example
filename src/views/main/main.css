@@ -70,12 +70,16 @@
 }
 
 .functionBotton {
-	border:0px solid red;
     display: flow;
     padding-bottom: 4px;
     position: relative;
     float: right;
     z-index: 100;
+}
+
+.functionTable {
+    clear: both;
+    overflow: hidden;
 }
 
 .queryform {

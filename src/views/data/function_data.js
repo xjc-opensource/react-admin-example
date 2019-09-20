@@ -20,10 +20,20 @@ class FunctionData extends React.Component {
     relationRef = {
         tableListObj: null,
         queryFormObj: null,
+        addFormObj: null,
+        updateFormObj: null,
     };
 
     onRefQueryForm = (ref) => {
         this.relationRef.queryFormObj = ref;
+    }
+
+    onRefAddForm = (ref) => {
+        this.relationRef.addFormObj = ref;
+    }
+
+    onRefUpdateForm = (ref) => {
+        this.relationRef.updateFormObj = ref;
     }
 
     onRefTableListQuery = (ref) => {
@@ -60,16 +70,23 @@ class FunctionData extends React.Component {
                                            fieldListUrl={ApiUrl.DATA_FUN.QUERY_FIELDS}
                                            title="查询" showDesc="查询" funKey={this.state.funKey}
                                            onRef={this.onRefQueryForm}
-                                           event={{endEvent: this.refreshTable}}></FunctionFieldListAntd>
+                                           event={{endEvent: this.refreshTable}}
+                    ></FunctionFieldListAntd>
 
                     <FunctionFieldListAntd url={ApiUrl.DATA_FUN.ADD_CMMIT} fieldListUrl={ApiUrl.DATA_FUN.ADD_FIELDS}
                                            title="增加" showDesc="增加"
-                                           funKey={this.state.funKey}></FunctionFieldListAntd>
+                                           funKey={this.state.funKey}
+                                           onRef={this.onRefAddForm}
+                                           event={{endEvent: this.refreshTable}}
+                    ></FunctionFieldListAntd>
 
                     <FunctionFieldListAntd url={ApiUrl.DATA_FUN.UPDATE_CMMIT}
                                            fieldListUrl={ApiUrl.DATA_FUN.UPDATE_FIELDS}
                                            title="编辑" showDesc="编辑"
-                                           funKey={this.state.funKey}></FunctionFieldListAntd>
+                                           funKey={this.state.funKey}
+                                           onRef={this.onRefUpdateForm}
+                                           event={{endEvent: this.refreshTable}}
+                    ></FunctionFieldListAntd>
 
                 </div>
 
