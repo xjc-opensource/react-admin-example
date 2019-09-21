@@ -1,15 +1,15 @@
 import React from "react";
 import FunctionTable from "./function_table";
 import ApiUrl from "@/api/apiurl";
-import {Button, Form} from "antd";
+import {Button, Form, Modal} from "antd";
 import {FunctionReactBoxFormAntd} from "./function_field";
+import {FunctionDelete} from "./function_delete";
 
 @Form.create()
 class FunctionFieldListAntd extends FunctionReactBoxFormAntd {
 }
 
 class FunctionData extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -22,6 +22,7 @@ class FunctionData extends React.Component {
         queryFormObj: null,
         addFormObj: null,
         updateFormObj: null,
+        deleteObj: null,
     };
 
     onRefQueryForm = (ref) => {
@@ -40,13 +41,31 @@ class FunctionData extends React.Component {
         this.relationRef.tableListObj = ref;
     }
 
+    onRefDelete = (ref) => {
+        this.relationRef.deleteObj = ref;
+    }
+
     refreshTable = () => {
         this.relationRef.tableListObj.refreshTable();
     }
 
-    componentDidMount() {
-        this.setFunKey();
+    handleEditData = (id) => {
+        this.relationRef.updateFormObj.handleEditData(id);
     }
+
+    handleDeleteData = (id) => {
+        Modal.confirm({
+            title: '',
+            content: '确认要删除数据',
+            okText: '是',
+            okType: 'danger',
+            cancelText: '否',
+            onOk: () => {
+                this.relationRef.deleteObj.handleDeleteData(id);
+            }
+        });
+    }
+
 
     componentWillReceiveProps(nextProps) {
         this.setFunKey();
@@ -90,9 +109,19 @@ class FunctionData extends React.Component {
 
                 </div>
 
-                <FunctionTable url={ApiUrl.DATA_FUN.SELECT} auto={false} funKey={this.state.funKey}
-                               onRef={this.onRefTableListQuery}>
-                </FunctionTable>
+                <FunctionTable url={ApiUrl.DATA_FUN.SELECT} funKey={this.state.funKey}
+                               onRef={this.onRefTableListQuery}
+                               event={{
+                                        editEvent: this.handleEditData,
+                                        deleteEvent: this.handleDeleteData,
+                                    }}
+                ></FunctionTable>
+
+                <FunctionDelete url={ApiUrl.DATA_FUN.DELETE}
+                                funKey={this.state.funKey}
+                                onRef={this.onRefDelete}
+                                event={{endEvent: this.refreshTable}}
+                ></FunctionDelete>
             </div>
         );
     }

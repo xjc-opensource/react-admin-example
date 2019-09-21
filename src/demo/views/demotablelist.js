@@ -14,7 +14,7 @@ class DemoTableList extends React.Component {
                 title: 'Name',
                 dataIndex: 'name',
                 key: 'name',
-                render: text => <span>{text}</span>,
+                render: (text, record, index) => <span>{text}</span>,
             },
             {
                 title: 'Age',

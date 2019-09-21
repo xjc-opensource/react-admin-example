@@ -1,9 +1,9 @@
 import React from 'react';
 import {Form, Input, Button, Modal, Spin, Select} from 'antd';
-import {ReactForm} from "../../compenents/ReactForm";
+import {FunctionRequest} from "./function_request";
 import Api from "../../api/api";
 
-export class FunctionReactBoxFormAntd extends ReactForm {
+export class FunctionReactBoxFormAntd extends FunctionRequest {
     constructor(props) {
         super(props);
         this.state.showFlag = false;
@@ -44,15 +44,26 @@ export class FunctionReactBoxFormAntd extends ReactForm {
         }
     }
 
+    keyValue = null;
+
     handleOpenShow = (data) => {
-        this.setState({showFlag: true, haveField: false, comps: []});
-        this.requestFieldList();
+       this.handleEditData(this.keyValue);
     };
+
+    handleEditData = (keyValue) => {
+        if (keyValue != null) {
+            this.keyValue = keyValue;
+            this.setState({showFlag: true, haveField: false, comps: []});
+            this.requestFieldList();
+        }
+    }
 
     requestFieldList = () => {
         let reqParams = {
             funKey: this.props.funKey,
-        };
+            id: this.keyValue,
+        }
+
         this.setState({loading: true});
         Api.postUrl(this.fieldListUrl, reqParams).then(res => {
             this.setState({loading: false});
@@ -67,6 +78,7 @@ export class FunctionReactBoxFormAntd extends ReactForm {
 
     handleCloseShow = () => {
         super.cancelRequest();
+        this.keyValue = null;
         this.setState({showFlag: false});
         super.showLoadEnd();
     };
@@ -81,18 +93,19 @@ export class FunctionReactBoxFormAntd extends ReactForm {
 
             let reqParams = {
                 funKey: this.props.funKey,
+                id: this.keyValue,
                 fieldsList: fieldsValue,
             };
-            console.log ("fieldsValue", fieldsValue);
+
             console.log(reqParams);
 
             this.requestDataExtendPost(this.props.url, reqParams);
-            //
         });
     };
 
     handleEnd = () => {
         if ((this.props.event) && (this.props.event.endEvent)) {
+            this.keyValue = null;
             this.props.event.endEvent();
         }
     };

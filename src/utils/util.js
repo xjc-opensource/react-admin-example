@@ -115,5 +115,18 @@ export function randomNum(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
+/**
+ *
+ * @param str
+ * @returns {boolean}
+ */
+export function stringEmptyOrNull(string) {
+    if (string == 'undefined' || !string || !/[^\s]/.test(string)) {
+        return true;
+    } else {
+       return false;
+    }
+}
+
 
 

@@ -1,8 +1,9 @@
 import React from "react";
-import {Spin, Table} from "antd";
-import {ReactTableList} from "../../compenents/ReactTableList";
+import {Button, Spin, Table} from "antd";
+import {FunctionBasetable} from "./function_basetable";
+import {Field_Type} from "./field_constants";
 
-class FunctionTable extends ReactTableList {
+class FunctionTable extends FunctionBasetable {
     constructor(props) {
         super(props);
         this.setPostOperate();
@@ -11,7 +12,7 @@ class FunctionTable extends ReactTableList {
 
     params = {
         funKey: "",
-    }
+    };
 
     onShowSizeChange(current, pageSize) {
         console.log({current: current, pageSize: pageSize});
@@ -28,6 +29,30 @@ class FunctionTable extends ReactTableList {
         this.requestListData(this.params);
     }
 
+    handeEditData = (record) => {
+        let rowkey = this.reqData.rowKey;
+        if (!this.GlobalUtil.stringEmptyOrNull(rowkey)) {
+            let keyValue = record[rowkey];
+            if ((this.props.event) && (this.props.event.editEvent)) {
+                this.props.event.editEvent(rowkey);
+            }
+        } else {
+            alert("key is not define");
+        }
+    }
+
+    handeDeleteData = (record) => {
+        let rowkey = this.reqData.rowKey;
+        if (!this.GlobalUtil.stringEmptyOrNull(rowkey)) {
+            let keyValue = record[rowkey];
+            if ((this.props.event) && (this.props.event.deleteEvent)) {
+                this.props.event.deleteEvent(keyValue);
+            }
+        } else {
+            alert("key is not define");
+        }
+    }
+
     componentWillReceiveProps(nextProps) {
         console.log("data funKey:", nextProps.funKey);
         if ((nextProps.funKey) && (nextProps.funKey.length > 0)) {
@@ -41,24 +66,45 @@ class FunctionTable extends ReactTableList {
         }
     }
 
+
     processCustomResultData(data) {
         let resultData = {};
 
         if (data.fieldListInfo) {
             let columns = [];
             const textRender = (text, record, index) => <span>{text}</span>;
+            const edtRender = (text, record, index) => <Button disabled={Boolean({text})===false} type="link" onClick={this.handeEditData.bind(this, record) }><u>编辑</u></Button>;
+            const delRender = (text, record, index) => <Button disabled={Boolean({text})===false} type="link" onClick={this.handeDeleteData.bind(this, record)}><u>删除</u></Button>;
+
 
             for (let index in data.fieldListInfo) {
                 const fieldsObj = data.fieldListInfo[index];
-                let columnsItem = {
-                    title: fieldsObj.fieldDesc,
-                    dataIndex: fieldsObj.fieldName,
-                    key: fieldsObj.fieldName,
-                    width: fieldsObj.width,
-                };
 
-                columnsItem.render = textRender;
-                columns.push(columnsItem);
+                if (fieldsObj.extendType === Field_Type.ftKey) {
+                    resultData.rowKey = fieldsObj.fieldViewName;
+                } else {
+                    let fieldDes = fieldsObj.fieldDesc;
+                    let render = textRender;
+
+                    if (fieldsObj.extendType === Field_Type.ftChkDel) {
+                        fieldDes = "del";
+                        render = delRender;
+                    }
+
+                    if (fieldsObj.extendType === Field_Type.ftChkEdt) {
+                        fieldDes = "edit";
+                        render = edtRender;
+                    }
+
+
+                    let columnsItem = {
+                        title: fieldDes,
+                        dataIndex: fieldsObj.fieldViewName,
+                        width: fieldsObj.width,
+                    };
+                    columnsItem.render = render;
+                    columns.push(columnsItem);
+                }
             }
             resultData.columns = columns;
         }
@@ -71,8 +117,13 @@ class FunctionTable extends ReactTableList {
             resultData.pageNum = data.pageInfo.pageNum;
             resultData.pageSize = data.pageInfo.pageSize;
         }
-
         return resultData;
+    }
+
+    componentDidMount() {
+        if (this.props.onRef) {
+            this.props.onRef(this);
+        }
     }
 
     render() {
@@ -85,7 +136,7 @@ class FunctionTable extends ReactTableList {
                         dataSource={this.state.dataList}
                         rowKey={this.reqData.rowKey}
                         size={'small'}
-                        scroll={{y: 600}}
+                        scroll={{y: 500}}
                         useFixedHeader = {true}
                         pagination={{
                             pageSizeOptions: ['10', '20', '30'],

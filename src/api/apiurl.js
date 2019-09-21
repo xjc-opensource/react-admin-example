@@ -18,6 +18,7 @@ let ApiUrl = {
         UPDATE_CMMIT: '/datafunction/updateCmmit',
         IMPORT_FIELDS: '/datafunction/importFields',
         IMPORT_CMMIT: '/datafunction/importCmmit',
+        DELETE: '/datafunction/delete',
     },
 };
 
@@ -33,15 +34,16 @@ if (GlobalEnvParams.MOCK_DATA) {
     }
 
     Object.assign(ApiUrl.DATA_FUN, {
-       // SELECT: '/datafunction/select',
-       // QUERY_FIELDS: '/_mockjs/datafunction/queryFields',
-       // QUERY_CMMIT: '/datafunction/queryCmmit',
-       // ADD_FIELDS: '/datafunction/addFields',
-       // ADD_CMMIT: '',
-       // UPDATE_FIELDS: '/datafunction/updateFields',
-       // UPDATE_CMMIT: '',
-       // IMPORT_FIELDS: '/datafunction/importFields',
-       // IMPORT_CMMIT: '',
+        /*SELECT: '/datafunction/select',
+        QUERY_FIELDS: '/_mockjs/datafunction/queryFields',
+        QUERY_CMMIT: '/datafunction/queryCmmit',
+        ADD_FIELDS: '/datafunction/addFields',
+        ADD_CMMIT: '/datafunction/addCmmit',
+        UPDATE_FIELDS: '/datafunction/updateFields',
+        UPDATE_CMMIT: '/datafunction/updateCmmit',
+        IMPORT_FIELDS: '/datafunction/importFields',
+        IMPORT_CMMIT: '/datafunction/importCmmit',*/
+        DELETE: '/_mockjs/datafunction/delete',
     })
 }
 

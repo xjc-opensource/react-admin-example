@@ -39,5 +39,13 @@ export default {
                 }, 2000);
             });
         });
+
+        mock.onPost('/_mockjs/datafunction/delete').reply(config => {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve([200, getResultSuccess({}, "删除成功")]);
+                }, 2000);
+            });
+        });
     }
 }
