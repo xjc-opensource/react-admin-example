@@ -34,7 +34,7 @@ class FunctionTable extends FunctionBasetable {
         if (!this.GlobalUtil.stringEmptyOrNull(rowkey)) {
             let keyValue = record[rowkey];
             if ((this.props.event) && (this.props.event.editEvent)) {
-                this.props.event.editEvent(rowkey);
+                this.props.event.editEvent(keyValue);
             }
         } else {
             alert("key is not define");

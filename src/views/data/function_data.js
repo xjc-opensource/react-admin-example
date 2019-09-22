@@ -103,6 +103,7 @@ class FunctionData extends React.Component {
                                            fieldListUrl={ApiUrl.DATA_FUN.UPDATE_FIELDS}
                                            title="编辑" showDesc="编辑"
                                            funKey={this.state.funKey}
+                                           enableId={true}
                                            onRef={this.onRefUpdateForm}
                                            event={{endEvent: this.refreshTable}}
                     ></FunctionFieldListAntd>

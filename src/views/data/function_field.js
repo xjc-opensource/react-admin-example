@@ -23,6 +23,10 @@ export class FunctionReactBoxFormAntd extends FunctionRequest {
         if (this.props.showDesc) {
             this.showDesc = this.props.showDesc;
         }
+
+        if (this.props.enableId) {
+            this.enableId = true;
+        }
     }
 
     boxConfig = {
@@ -43,18 +47,22 @@ export class FunctionReactBoxFormAntd extends FunctionRequest {
             return <Button type='link' onClick={this.handleOpenShow}>{this.showDesc}</Button>;
         }
     }
-
+    enableId = false;
     keyValue = null;
 
     handleOpenShow = (data) => {
-       this.handleEditData(this.keyValue);
+        if ((this.enableId === true) && this.GlobalUtil.stringEmptyOrNull(this.keyValue)) {
+            alert("id value is null or empty");
+            return ;
+        }
+        this.setState({showFlag: true, haveField: false, comps: []});
+        this.requestFieldList();
     };
 
-    handleEditData = (keyValue) => {
-        if (keyValue != null) {
-            this.keyValue = keyValue;
-            this.setState({showFlag: true, haveField: false, comps: []});
-            this.requestFieldList();
+    handleEditData = (id) => {
+       if (!this.GlobalUtil.stringEmptyOrNull(id)){
+            this.keyValue = id;
+            this.handleOpenShow();
         }
     }
 

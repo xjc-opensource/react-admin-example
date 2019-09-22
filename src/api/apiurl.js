@@ -43,7 +43,7 @@ if (GlobalEnvParams.MOCK_DATA) {
         UPDATE_CMMIT: '/datafunction/updateCmmit',
         IMPORT_FIELDS: '/datafunction/importFields',
         IMPORT_CMMIT: '/datafunction/importCmmit',*/
-        DELETE: '/_mockjs/datafunction/delete',
+        //DELETE: '/_mockjs/datafunction/delete',
     })
 }
 
