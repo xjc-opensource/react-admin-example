@@ -25,7 +25,7 @@ export function getQueryStringByName(name, search ) {
         context = r[2];
     reg = null;
     r = null;
-    return context == null || context === "" || context === "undefined" ? "" : context;
+    return context === null || context === "" || context === "undefined" ? "" : context;
 }
 
 
@@ -33,7 +33,7 @@ export function convertToUrlParams(data) {
     let _result = [];
     for (let key in data) {
         var value = data[key];
-        if (value.constructor == Array) {
+        if (value.constructor === Array) {
             value.forEach(function(_value) {
                 _result.push(key + "=" + _value);
             });
@@ -121,7 +121,7 @@ export function randomNum(min, max) {
  * @returns {boolean}
  */
 export function stringEmptyOrNull(string) {
-    if (string == 'undefined' || !string || !/[^\s]/.test(string)) {
+    if (string === 'undefined' || !string || !/[^\s]/.test(string)) {
         return true;
     } else {
        return false;
@@ -134,7 +134,7 @@ export function stringEmptyOrNull(string) {
  * @returns {boolean}
  */
 export function  haveObject(object) {
-    if (object == 'undefined' || object == null) {
+    if (object === 'undefined' || object == null) {
         return false;
     } else {
         return true;

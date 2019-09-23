@@ -1,5 +1,5 @@
 
-export const Field_Type = {
+export const FieldType = {
     ftPage: 0,
     ftString: 1,
     ftInteger: 2,
@@ -44,5 +44,3 @@ export const Field_Type = {
     ftDisEdt: 79,
     ftEnd: 80
 };
-
-

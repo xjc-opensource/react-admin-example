@@ -1,43 +1,35 @@
 import React from "react";
-import {Modal, Spin} from "antd";
+import {Button, Modal, Spin} from "antd";
 
-import {FunctionRequest} from "./function_request";
+import {FunctionRequest} from "./FunctionRequest";
 
-export class FunctionDelete extends FunctionRequest {
+export class FunctionExport extends FunctionRequest {
     constructor(props) {
         super(props);
         this.state.showFlag = false;
     }
 
-    keyValue = null;
-
     handleCloseShow = () => {
         super.cancelRequest();
-        this.keyValue = null;
         this.setState({showFlag: false});
         super.showLoadEnd();
     };
 
     handleEnd = () => {
         if ((this.props.event) && (this.props.event.endEvent)) {
-            this.keyValue = null;
             this.props.event.endEvent();
         }
     };
 
-    handleDeleteData = (keyValue) => {
-        if (keyValue != null) {
-            this.keyValue = keyValue;
-            this.setState({showFlag: true});
+    handleExportData = () => {
+        this.setState({showFlag: true});
 
-            let reqParams = {
-                funKey: this.props.funKey,
-                id: this.keyValue,
-            };
+        let reqParams = {
+            funKey: this.props.funKey,
+        };
 
-            console.log(reqParams);
-            this.requestDataExtendPost(this.props.url, reqParams);
-        }
+        console.log(reqParams);
+        this.requestDataExtendPost(this.props.url, reqParams);
     }
 
     processResponseData(data) {
@@ -59,16 +51,19 @@ export class FunctionDelete extends FunctionRequest {
 
     render() {
         return (
-        <Modal
-            title={'删除'}
-            visible={this.state.showFlag}
-            onCancel={this.handleCloseShow}
-            footer={null}
-        >
-            <Spin spinning={this.state.loading} tip='数据删除中...'>
+            <span className="functionBotton">
+            <Button type='inline' onClick={this.handleExportData}>导出</Button>
+            <Modal
+                title={'导出'}
+                visible={this.state.showFlag}
+                onCancel={this.handleCloseShow}
+                footer={null}
+            >
+                <Spin spinning={this.state.loading} tip='数据导出中...'>
 
-            </Spin>
-        </Modal>
+                </Spin>
+            </Modal>
+                </span>
         );
     }
 }

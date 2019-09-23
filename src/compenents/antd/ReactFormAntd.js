@@ -1,6 +1,6 @@
 import React from "react";
 import {Button, Form, Modal, Spin} from "antd";
-import {ReactForm} from "./ReactForm";
+import {ReactForm} from "../ReactForm";
 
 export class ReactBoxFormAntd extends ReactForm {
     constructor(props) {

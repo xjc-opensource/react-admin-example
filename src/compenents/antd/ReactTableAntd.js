@@ -1,7 +1,7 @@
 import React from 'react';
-import {ReactTableListAntd} from './ReactTableList_antd';
+import {ReactTableListAntd} from './ReactTableListAntd';
 import {Button, Divider, Modal, Spin} from 'antd';
-import {ReactTable} from './ReactTable';
+import {ReactTable} from '../ReactTable';
 
 export class ReactTableAntd extends ReactTable {
     constructor(props) {

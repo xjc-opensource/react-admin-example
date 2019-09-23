@@ -1,6 +1,6 @@
 import React from "react";
 import {Table, Spin} from "antd";
-import {ReactTableList} from "./ReactTableList";
+import {ReactTableList} from "../ReactTableList";
 
 export class ReactTableListAntd extends ReactTableList {
     constructor(props) {

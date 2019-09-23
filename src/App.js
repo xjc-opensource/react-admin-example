@@ -12,6 +12,7 @@ import Main from './views/main/main';
 import AuthRoute from './router/authroute';
 import store from './store/index';
 import {Provider} from 'react-redux';
+import { hot } from 'react-hot-loader'
 
 Component.prototype.GlobalEnvParams = GlobalEnvParams;
 Component.prototype.GlobalUtil = GlobalUtil;
@@ -46,4 +47,4 @@ class App extends Component {
     }
 }
 
-export default App;
+export default hot(module)(App);

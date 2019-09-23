@@ -38,7 +38,7 @@ export const get = (menuList) => {
 
                         let newMenu = {
                             key:  parnetMenu.key +   '/' + menuObj.code,
-                            linkPath: '/common/data?action=' + menuObj.code,
+                            linkPath: '/common/data/' + menuObj.code,
                             title: menuObj.name,
                         }
                         parnetMenu.subs.push(newMenu);

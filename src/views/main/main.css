@@ -79,10 +79,18 @@
 
 .functionTable {
     clear: both;
-    overflow: hidden;
+/*    overflow: hidden;*/
+    align: "center";
 }
 
 .queryform {
 /*    background: #61dafb;
     color: #FFFFFF;*/
+}
+
+.nowraptext {
+    display: block;
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import {ReactTableListAntd} from "@/compenents/ReactTableList_antd";
+import {ReactTableListAntd} from "../../compenents/antd/ReactTableListAntd";
 
 class DemoTableList extends React.Component {
     render() {

@@ -1,5 +1,5 @@
 import React from 'react';
-import {FunctionRequest} from "./function_request";
+import {FunctionRequest} from "./FunctionRequest";
 
 export class FunctionBasetable extends FunctionRequest {
     constructor(props) {
@@ -22,11 +22,25 @@ export class FunctionBasetable extends FunctionRequest {
         rowKey: null
     };
 
+    componentWillMount() {
+        this.setState({
+            dataList: [],
+            columns: [],
+            total: 0,
+            current: 1,
+            pageSize: 10,
+        });
+    }
+
     setPageNum(pageNum) {
         this.reqData.reqParams.pageNum = pageNum;
     }
 
-    requestListPageData(pageNum, pageSize, queryParam){
+    setPageSize(pageSize) {
+        this.reqData.reqParams.pageSize = pageSize;
+    }
+
+    requestListPageData(pageNum, pageSize, queryParam) {
         if (pageNum) {
             this.setPageNum(pageNum);
         }
@@ -37,7 +51,6 @@ export class FunctionBasetable extends FunctionRequest {
     }
 
     requestQueryData(queryParam) {
-        this.setPageNum(1);
         this.requestListData(queryParam);
     }
 
@@ -55,7 +68,7 @@ export class FunctionBasetable extends FunctionRequest {
     processResponseData(data) {
         super.processResponseData(data);
         let resultData = this.processCustomResultData(data);
-        let  setData = {};
+        let setData = {};
         if (resultData.list) {
             setData.dataList = resultData.list;
         }

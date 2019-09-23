@@ -1,6 +1,6 @@
 import React from 'react';
 import {Form, Input, Button, Modal, Spin, Select} from 'antd';
-import {FunctionRequest} from "./function_request";
+import {FunctionRequest} from "./FunctionRequest";
 import Api from "../../api/api";
 
 export class FunctionReactBoxFormAntd extends FunctionRequest {

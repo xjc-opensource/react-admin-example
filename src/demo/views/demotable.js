@@ -1,7 +1,7 @@
 import {DatePicker, Form, Input} from "antd";
-import ReactTableAntd from "@/compenents/ReactTable_antd";
+import ReactTableAntd from "../../compenents/antd/ReactTableAntd";
 import React from "react";
-import {ReactBoxAddFormAntd, ReactBoxEditFormAntd, ReactQueryFormAntd} from "@/compenents/ReactForm_antd";
+import {ReactBoxAddFormAntd, ReactBoxEditFormAntd, ReactQueryFormAntd} from "@/compenents/antd/ReactFormAntd";
 
 @Form.create()
 class DemoTableAddForm extends ReactBoxAddFormAntd {

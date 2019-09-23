@@ -1,75 +1,24 @@
-import React from "react";
+import FunctionTable from "../FunctionTable";
 import {Button, Spin, Table} from "antd";
-import {FunctionBasetable} from "./function_basetable";
-import {Field_Type} from "./field_constants";
+import React from "react";
 
-class FunctionTable extends FunctionBasetable {
-    constructor(props) {
-        super(props);
-        this.setPostOperate();
-        this.params.funKey = props.funKey;
-    }
-
-    params = {
-        funKey: "",
-    };
+export class FunctionTableAntd extends FunctionTable {
 
     onShowSizeChange(current, pageSize) {
         console.log({current: current, pageSize: pageSize});
-        this.requestListPageData(current, pageSize, this.params);
+        this.setPageNum(current);
+        this.setPageSize(pageSize)
+        this.requestFunctionData();
     }
 
-    onChange(pageNumber) {
-        console.log('Page: ', pageNumber);
+    onCurrentChange(pageNumber) {
         this.setPageNum(pageNumber);
-        this.requestListData(this.params);
+        this.requestFunctionData();
     }
-
-    refreshTable = () => {
-        this.requestListData(this.params);
-    }
-
-    handeEditData = (record) => {
-        let rowkey = this.reqData.rowKey;
-        if (!this.GlobalUtil.stringEmptyOrNull(rowkey)) {
-            let keyValue = record[rowkey];
-            if ((this.props.event) && (this.props.event.editEvent)) {
-                this.props.event.editEvent(keyValue);
-            }
-        } else {
-            alert("key is not define");
-        }
-    }
-
-    handeDeleteData = (record) => {
-        let rowkey = this.reqData.rowKey;
-        if (!this.GlobalUtil.stringEmptyOrNull(rowkey)) {
-            let keyValue = record[rowkey];
-            if ((this.props.event) && (this.props.event.deleteEvent)) {
-                this.props.event.deleteEvent(keyValue);
-            }
-        } else {
-            alert("key is not define");
-        }
-    }
-
-    componentWillReceiveProps(nextProps) {
-        console.log("data funKey:", nextProps.funKey);
-        if ((nextProps.funKey) && (nextProps.funKey.length > 0)) {
-            this.params.funKey = nextProps.funKey;
-            this.setPageNum(1);
-            this.requestListData(this.params);
-        } else {
-            this.params.funKey = this.props.funKey;
-            this.setPageNum(1);
-            this.requestListData(this.params);
-        }
-    }
-
 
     processCustomResultData(data) {
         let resultData = {};
-
+        let FieldType = this.FieldType;
         if (data.fieldListInfo) {
             let columns = [];
             const textRender = (text, record, index) => <span>{text}</span>;
@@ -80,17 +29,17 @@ class FunctionTable extends FunctionBasetable {
             for (let index in data.fieldListInfo) {
                 const fieldsObj = data.fieldListInfo[index];
 
-                if (fieldsObj.extendType === Field_Type.ftKey) {
+                if (fieldsObj.extendType === FieldType.ftKey) {
                     resultData.rowKey = fieldsObj.fieldViewName;
                 } else {
                     let fieldDes = fieldsObj.fieldDesc;
                     let render = textRender;
 
-                    if (fieldsObj.extendType === Field_Type.ftChkDel) {
+                    if (fieldsObj.extendType === FieldType.ftChkDel) {
                         render = delRender;
                     }
 
-                    if (fieldsObj.extendType === Field_Type.ftChkEdt) {
+                    if (fieldsObj.extendType === FieldType.ftChkEdt) {
                         render = edtRender;
                     }
                     let columnsItem = {
@@ -116,12 +65,6 @@ class FunctionTable extends FunctionBasetable {
         return resultData;
     }
 
-    componentDidMount() {
-        if (this.props.onRef) {
-            this.props.onRef(this);
-        }
-    }
-
     render() {
         return (
             <div>
@@ -137,7 +80,7 @@ class FunctionTable extends FunctionBasetable {
                         pagination={{
                             pageSizeOptions: ['10', '20', '30'],
                             showSizeChanger: true,
-                            onChange: this.onChange.bind(this),
+                            onChange: this.onCurrentChange.bind(this),
                             onShowSizeChange: this.onShowSizeChange.bind(this),
                             current: this.state.current,
                             total: this.state.total,
@@ -149,5 +92,3 @@ class FunctionTable extends FunctionBasetable {
         );
     }
 }
-
-export default FunctionTable;

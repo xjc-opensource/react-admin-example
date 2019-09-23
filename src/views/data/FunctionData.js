@@ -1,10 +1,14 @@
 import React from "react";
-import FunctionTable from "./function_table";
-import ApiUrl from "@/api/apiurl";
+
+//import {FunctionTableAntd as FunctionTable} from "./antd/FunctionTableAntd";
+//import {FunctionDeleteAntd as FunctionDelete} from "./antd/FunctionDeleteAntd";
+ import {FunctionTableElement as FunctionTable} from "./element/FunctionTableElement";
+import {FunctionDeleteElement as FunctionDelete} from "./element/FunctionDeleteElement";
+import ApiUrl from "../../api/apiurl";
 import {Button, Form, Modal} from "antd";
-import {FunctionReactBoxFormAntd} from "./function_field";
-import {FunctionDelete} from "./function_delete";
-import {FunctionExport} from "./function_export";
+import {FunctionReactBoxFormAntd} from "./FunctionField";
+
+import {FunctionExport} from "./FunctionExport";
 
 @Form.create()
 class FunctionFieldListAntd extends FunctionReactBoxFormAntd {
@@ -61,6 +65,7 @@ class FunctionData extends React.Component {
     };
 
     handleEditData = (id) => {
+        console.log("xx", this.relationRef.updateFormObj);
         this.relationRef.updateFormObj.handleEditData(id);
     };
 
@@ -79,15 +84,28 @@ class FunctionData extends React.Component {
 
 
     componentWillReceiveProps(nextProps) {
-        this.setFunKey();
+        if (nextProps.match.params.id) {
+            this.setFunKey(nextProps.match.params.id);
+        } else {
+            this.setFunKey(this.props.match.params.id);
+        }
     }
 
-    setFunKey() {
-        let funKey = this.GlobalUtil.getQueryStringByName("action");
-        console.log("componentWillReceiveProps funKey:", funKey);
-        this.setState({
-            funKey: funKey
-        });
+
+
+    componentDidMount() {
+        this.setFunKey(this.props.match.params.id);
+    }
+
+    setFunKey(id) {
+       // let funKey = this.GlobalUtil.getQueryStringByName("action");
+        if (!this.GlobalUtil.stringEmptyOrNull(id)) {
+            let funKey = id;
+            console.log("set funKey:", funKey);
+            this.setState({
+                funKey: funKey
+            });
+        }
     }
 
     render() {
@@ -98,21 +116,21 @@ class FunctionData extends React.Component {
 
                     <FunctionExport url={ApiUrl.DATA_FUN.EXPORT}
                                     funKey={this.state.funKey}
-                                    ref={this.onRefExport}
+                                    onRef={this.onRefExport}
                         /* event={{endEvent: this.refreshTable}}*/
                     ></FunctionExport>
 
                     <FunctionFieldListAntd url={ApiUrl.DATA_FUN.QUERY_CMMIT}
                                            fieldListUrl={ApiUrl.DATA_FUN.QUERY_FIELDS}
                                            title="查询" showDesc="查询" funKey={this.state.funKey}
-                                           ref={this.onRefQueryForm}
+                                           onRef={this.onRefQueryForm}
                                            event={{endEvent: this.refreshTable}}
                     ></FunctionFieldListAntd>
 
                     <FunctionFieldListAntd url={ApiUrl.DATA_FUN.ADD_CMMIT} fieldListUrl={ApiUrl.DATA_FUN.ADD_FIELDS}
                                            title="增加" showDesc="增加"
                                            funKey={this.state.funKey}
-                                           ref={this.onRefAddForm}
+                                           onRef={this.onRefAddForm}
                                            event={{endEvent: this.refreshTable}}
                     ></FunctionFieldListAntd>
 
@@ -122,14 +140,14 @@ class FunctionData extends React.Component {
                                            funKey={this.state.funKey}
                                            enableId={true}
                                            showStyleFlag={0}
-                                           ref={this.onRefUpdateForm}
+                                           onRef={this.onRefUpdateForm}
                                            event={{endEvent: this.refreshTable}}
                     ></FunctionFieldListAntd>
 
                 </div>
 
                 <FunctionTable url={ApiUrl.DATA_FUN.SELECT} funKey={this.state.funKey}
-                               ref={this.onRefTableListQuery}
+                               onRef={this.onRefTableListQuery}
                                event={{
                                         editEvent: this.handleEditData,
                                         deleteEvent: this.handleDeleteData,
@@ -138,7 +156,7 @@ class FunctionData extends React.Component {
 
                 <FunctionDelete url={ApiUrl.DATA_FUN.DELETE}
                                 funKey={this.state.funKey}
-                                ref={this.onRefDelete}
+                                onRef={this.onRefDelete}
                                 event={{endEvent: this.refreshTable}}
                 ></FunctionDelete>
 

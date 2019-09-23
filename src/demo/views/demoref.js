@@ -9,7 +9,7 @@ class DemoRef extends React.Component {
 
     state = {
         userInput: "",
-    }
+    };
 
     handleChange(e) {
         this.setState({userInput: e.target.value});

@@ -43,7 +43,7 @@ export default {
         mock.onPost('/_mockjs/datafunction/delete').reply(config => {
             return new Promise((resolve) => {
                 setTimeout(() => {
-                    resolve([200, getResultSuccess({}, "删除成功")]);
+                    resolve([200, getResultSuccess({cmmitResult: {cmmitFlag:1}}, "删除成功")]);
                 }, 2000);
             });
         });

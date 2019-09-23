@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {reset, add, sub, addAsync, get} from '@/store/counter/action.js';
+import {reset, add, sub, addAsync, get} from '../../store/counter/action.js';
 
 
 //使用注解的方式修改state和组件之间的传值
