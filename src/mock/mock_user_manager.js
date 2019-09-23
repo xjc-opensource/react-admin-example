@@ -7,7 +7,7 @@ export default {
         let _Users = Users;
 
         //获取用户列表
-        mock.onGet('/user/list').reply(config => {
+        mock.onGet('/_mockjs/user/list').reply(config => {
             let {name} = config.params;
             let mockUsers = _Users.filter(user => {
                 if (name && user.name.indexOf(name) === -1) return false;
@@ -21,7 +21,7 @@ export default {
         });
 
         //获取用户列表（分页）
-        mock.onGet('/user/listpage').reply(config => {
+        mock.onGet('/_mockjs/user/listpage').reply(config => {
             let {pageNum, name, pageSize} = config.params;
             let mockUsers = _Users.filter(user => {
                 if (name && user.name.indexOf(name) === -1) return false;
@@ -42,7 +42,7 @@ export default {
         });
 
         //删除用户
-        mock.onPost('/user/delete').reply(config => {
+        mock.onPost('/_mockjs/user/delete').reply(config => {
             let {id} = JSON.parse(config.data);
             _Users = _Users.filter(u => u.id !== id);
             return new Promise((resolve) => {
@@ -53,7 +53,7 @@ export default {
         });
 
         //批量删除用户
-        mock.onPost('/user/batchdelete').reply(config => {
+        mock.onPost('/_mockjs/user/batchdelete').reply(config => {
             let {ids} = JSON.parse(config.data);
             ids = ids.split(',');
             _Users = _Users.filter(u => !ids.includes(u.id));
@@ -65,7 +65,7 @@ export default {
         });
 
         //编辑用户
-        mock.onPost('/user/edit').reply(config => {
+        mock.onPost('/_mockjs/user/edit').reply(config => {
             let {id, name, addr, age, birth, sex} = JSON.parse(config.data);
             _Users.some(u => {
                 if (u.id === id) {
@@ -86,7 +86,7 @@ export default {
         });
 
         //新增用户
-        mock.onPost('/user/add').reply(config => {
+        mock.onPost('/_mockjs/user/add').reply(config => {
             let {name, addr, age, birth, sex} = JSON.parse(config.data);
             let data  = {
                 id: Mock.Random.guid(),

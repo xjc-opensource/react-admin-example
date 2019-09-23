@@ -1,10 +1,9 @@
 import React from 'react'
-import './style.css'
 
-class Home extends React.Component {
+class DemoRef extends React.Component {
     constructor(props) {
         super(props);
-        this.state.userInput = "input";
+        this.state.userInput = "Hello World";
         this.myRef = React.createRef();
     }
 
@@ -13,22 +12,17 @@ class Home extends React.Component {
     }
 
     handleChange(e) {
-        this.setState({ userInput: e.target.value });
+        this.setState({userInput: e.target.value});
     }
 
     clearAndFocusInput() {
-        this.setState({ userInput: '' });
-
+        this.setState({userInput: ''});
         this.myRef.current.focus();
     }
 
     render() {
-        let helloString = " Hello World  !!!";
         return (
-            <div style={styles.bg} className='home'   >
-                Hello World!!!
-                <div dangerouslySetInnerHTML={{ __html: helloString }} />
-
+            <div>
                 <div onClick={this.clearAndFocusInput.bind(this)}>
                     Click to Focus and Reset
                 </div>
@@ -42,14 +36,4 @@ class Home extends React.Component {
     }
 }
 
-const styles = {
-    bgxx: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: 'calc(100vh - 64px)'
-    }
-}
-
-export default Home
+export default DemoRef

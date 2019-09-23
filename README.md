@@ -140,6 +140,7 @@ github地址：[基于react+antd的后台框架](https://github.com/xjc-opensour
 * antd: https://ant.design
 * react-devtools: https://github.com/facebook/react-devtools
 * react-devtools-setup: https://www.jianshu.com/p/6c1a4d18e002
+* https://zh-hans.reactjs.org/
 
 
 link:  

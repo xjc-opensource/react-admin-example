@@ -128,5 +128,28 @@ export function stringEmptyOrNull(string) {
     }
 }
 
+/**
+ *
+ * @param object
+ * @returns {boolean}
+ */
+export function  haveObject(object) {
+    if (object == 'undefined' || object == null) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+export function getObject(object, defaultValue) {
+    if (haveObject(object)) {
+        return object;
+    } else {
+        return defaultValue;
+    }
+}
+
+
+
 
 

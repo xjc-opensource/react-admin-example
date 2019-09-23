@@ -39,7 +39,7 @@ class DemoTableList extends React.Component {
             },
         ];
         return (
-            <ReactTableListAntd url='/user/listpage' auto={true} columns={columns}>
+            <ReactTableListAntd url='/_mockjs/user/listpage' auto={true} columns={columns}>
             </ReactTableListAntd>
         );
     }

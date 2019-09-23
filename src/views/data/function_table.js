@@ -87,16 +87,12 @@ class FunctionTable extends FunctionBasetable {
                     let render = textRender;
 
                     if (fieldsObj.extendType === Field_Type.ftChkDel) {
-                        fieldDes = "del";
                         render = delRender;
                     }
 
                     if (fieldsObj.extendType === Field_Type.ftChkEdt) {
-                        fieldDes = "edit";
                         render = edtRender;
                     }
-
-
                     let columnsItem = {
                         title: fieldDes,
                         dataIndex: fieldsObj.fieldViewName,

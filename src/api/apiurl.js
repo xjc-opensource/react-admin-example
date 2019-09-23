@@ -19,6 +19,7 @@ let ApiUrl = {
         IMPORT_FIELDS: '/datafunction/importFields',
         IMPORT_CMMIT: '/datafunction/importCmmit',
         DELETE: '/datafunction/delete',
+        EXPORT: '/datafunction/export',
     },
 };
 
@@ -42,8 +43,9 @@ if (GlobalEnvParams.MOCK_DATA) {
         UPDATE_FIELDS: '/datafunction/updateFields',
         UPDATE_CMMIT: '/datafunction/updateCmmit',
         IMPORT_FIELDS: '/datafunction/importFields',
-        IMPORT_CMMIT: '/datafunction/importCmmit',*/
-        //DELETE: '/_mockjs/datafunction/delete',
+        IMPORT_CMMIT: '/datafunction/importCmmit',
+        DELETE: '/_mockjs/datafunction/delete',
+        EXPORT: '/datafunction/export', */
     })
 }
 

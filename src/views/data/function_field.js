@@ -9,24 +9,12 @@ export class FunctionReactBoxFormAntd extends FunctionRequest {
         this.state.showFlag = false;
         this.state.haveField = false;
         this.state.comps = [];
-        if (this.props.title) {
-            this.boxConfig.title = this.props.title;
-        }
-        if (this.props.fieldListUrl) {
-            this.fieldListUrl = this.props.fieldListUrl;
-        }
 
-        if (this.props.showStyleFlag) {
-            this.showStyleFlag = this.props.showStyleFlag;
-        }
-
-        if (this.props.showDesc) {
-            this.showDesc = this.props.showDesc;
-        }
-
-        if (this.props.enableId) {
-            this.enableId = true;
-        }
+        this.fieldListUrl = this.GlobalUtil.getObject(this.props.fieldListUrl, this.fieldListUrl);
+        this.boxConfig.title= this.GlobalUtil.getObject(this.props.title, this.boxConfig.title);
+        this.showStyleFlag = this.GlobalUtil.getObject(this.props.showStyleFlag, this.showStyleFlag);
+        this.showDesc = this.GlobalUtil.getObject(this.props.showDesc, this.showDesc);
+        this.enableId = this.GlobalUtil.getObject(this.props.enableId, this.enableId);
     }
 
     boxConfig = {

@@ -110,11 +110,11 @@ class DemoTable extends ReactTableAntd {
         super(props);
 
         Object.assign(this.tableConfig, {
-            url: '/user/listpage',
+            url: '/_mockjs/user/listpage',
             auto: true,
-            delUrl: '/user/delete',
-            addUrl: '/user/add',
-            editUrl: 'user/edit',
+            delUrl: '/_mockjs/user/delete',
+            addUrl: '/_mockjs/user/add',
+            editUrl: '/_mockjs/user/edit',
             addFormElement: DemoTableAddForm,
             editFormElement: DemoTableEditForm,
             queryFormElement: DemoTableQueryForm,
