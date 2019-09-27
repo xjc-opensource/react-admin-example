@@ -153,3 +153,4 @@ github地址：[基于react+antd的后台框架](https://github.com/xjc-opensour
 
 link:  
    weixin: chinaxjc208
+   QQ群: 775310569
