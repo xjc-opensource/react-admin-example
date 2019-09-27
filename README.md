@@ -130,7 +130,7 @@ github地址：[基于react+antd的后台框架](https://github.com/xjc-opensour
 ```
 3.4. 安装开发IDE - WebStorm(推荐)
 
-#开发说明
+# 5、说明
 ~~~
  # 各组件访问 GlobalEnvParams 取不同环境的配置变量
  # BrowserRouter与HashRouter
@@ -138,7 +138,7 @@ github地址：[基于react+antd的后台框架](https://github.com/xjc-opensour
     browserRouter： url后面加上/a/b, 但服务器需要把所有路径重定向到首页。
 ~~~
 
-#docker
+# 6、docker
    docker run --restart=unless-stopped  --name react-admin-example_mockjs -p 3100:80 -d benxjc/react-admin-example:mockjs
    
 
