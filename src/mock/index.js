@@ -5,7 +5,6 @@ import mock_user_manager from './mock_user_manager';
 import mock_function from './mock_function';
 import {GlobalEnvParams} from '../core/envconfig'
 
-
 if (GlobalEnvParams.MOCK_DATA) {
     axios.defaults.baseURL = GlobalEnvParams.API_ROOT;
     let mock = new MockAdapter(axios, {delayResponse: 500});

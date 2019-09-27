@@ -3,9 +3,8 @@ import apiProcess from './apiprocess';
 import {RESP_CODE} from './responecode.js';
 import ApiUrl from '../api/apiurl';
 
-axios.defaults.timeout = 60 * 1000; //响应时间
-//axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=UTF-8'; //配置请求头
-//axios.defaults.baseURL;   //配置接口地址
+apiProcess.processDefaultAxios(axios);
+
 let CancelToken = axios.CancelToken;
 
 function getApiUrl(path) {
@@ -21,20 +20,12 @@ function getResponseCodeString(code) {
 }
 
 function processNoAuth() {
-    return apiProcess.processNoAuth();
-}
-
-function getUserToken() {
-    return apiProcess.getUserToken();
+    apiProcess.processNoAuth();
 }
 
 axios.interceptors.request.use(
     config => {
-        config.headers['x-access-token'] = getUserToken();
-        config.headers['x-access-type'] = 'web';
-        config.headers['x-access-systemCode'] = '1';
-        config.headers['x-access-loginFlag'] = '1';
-        return config;
+        return apiProcess.getDefaultHeader(config);
     },
     err => {
         return Promise.reject(err)
@@ -51,19 +42,23 @@ axios.interceptors.response.use((res) => {
     return res;
 
 }, (err) => {
-    //console.log(JSON.stringify(error));
-
     if (axios.isCancel(err)) {
     } else {
+        console.log("err: ", err);
         let hintStr = getResponseCodeString("message.errorNetwork");
-        if ((err) && (err.response) && (err.response.status)) {
-            hintStr += ":" + err.response.status;
+        if (err) {
+            if (err.code === 'ECONNABORTED' && err.message.indexOf('timeout') !== -1) {
+                hintStr += " : " + err.message;
+            } else {
+                if ((err.response) && (err.response.status)) {
+                    hintStr += " : " + err.response.status;
+                }
+            }
         }
         showErrorMessage(hintStr);
     }
     return Promise.reject(err);
 });
-
 
 export function isResponseSuccess(data) {
     return data.code === RESP_CODE.SUCCESS;
@@ -72,8 +67,10 @@ export function isResponseSuccess(data) {
 export function processResponseData(data) {
     if (data.code === RESP_CODE.AUTHFAIL) { //授权失败
         processNoAuth();
+        return true;
     } else if (data.code === RESP_CODE.ERROR) { //错误
         showErrorMessage(data.message);
+        return true;
     } else if (data.code === RESP_CODE.VALIDFAIL) { //检测参数失败
         let vaildStr = "";
         if ((data.extendData) && (data.extendData.fieldErrors)) {
@@ -91,13 +88,18 @@ export function processResponseData(data) {
             }
         }
         showErrorMessage(vaildStr);
+        return true;
     } else if (data.code === RESP_CODE.UPDATEVER) { //版本过期
         showErrorMessage(getResponseCodeString("message.upateVer"));
+        return true;
     } else if (data.code === RESP_CODE.NOTPOPEDOM) { //无权限
         showErrorMessage("[" + data.data + "]" + getResponseCodeString("message.notPopedom"));
+        return true;
     } else if (data.code === RESP_CODE.NOT_DATA_POPEDOM) { //无数据权限
         showErrorMessage("[" + data.data + "]" + getResponseCodeString("message.notDataPopedom"));
+        return true;
     }
+    return false;
 }
 
 export function isUploadSuccess(data) {
@@ -162,6 +164,8 @@ export function getUrl(url, params, that) {
     })
 }
 
+
+
 export function postUrl(url, params, that) {
     return new Promise((resolve, reject) => {
         let source = CancelToken.source();
@@ -178,7 +182,6 @@ export function postUrl(url, params, that) {
         }).catch(err => {
             if (axios.isCancel(err)) {
                 console.log('Request canceled', err.message);
-                throw err;
             } else {
                 let data = {};
                 data.code = RESP_CODE.NOTKNOWN;
@@ -190,7 +193,7 @@ export function postUrl(url, params, that) {
 }
 
 export default {
-    getUrl
-    , postUrl
-    , Url: ApiUrl
+    Url: ApiUrl,
+    getUrl,
+    postUrl,
 }

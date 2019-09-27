@@ -16,10 +16,10 @@ function showLoadingMessage(msg) {
 
 function closeLoadingMessage() {
    if (loadingMessage) {
-        setTimeout(loadingMessage, 100);
-        loadingMessage = null;
+       setTimeout(loadingMessage, 10);
+       loadingMessage = null;
     }
-    // message.destroy();
+    //message.destroy();
 }
 
 export default {

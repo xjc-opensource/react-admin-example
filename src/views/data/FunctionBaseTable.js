@@ -1,4 +1,3 @@
-import React from 'react';
 import {FunctionRequest} from "./FunctionRequest";
 
 export class FunctionBasetable extends FunctionRequest {
@@ -55,6 +54,7 @@ export class FunctionBasetable extends FunctionRequest {
     }
 
     requestListData(params) {
+        this.reqData.rowKey = null;
         let queryParam = Object.assign({}, this.reqData.reqParams);
         if (params) {
             Object.assign(queryParam, params);

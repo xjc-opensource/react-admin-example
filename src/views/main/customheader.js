@@ -16,11 +16,9 @@ import {connect} from 'react-redux'
 )
 class Customheader extends React.Component {
 
-    constructor(props) {
+/*    constructor(props) {
         super(props);
-       // Object.assign(this.props,{} , {xx:"counter"});
-
-    }
+    }*/
     state = {
         icon: 'arrows-alt',
         count: 10000,
@@ -59,7 +57,7 @@ class Customheader extends React.Component {
         const {icon, count} = this.state;
         const {collapsed, location} = this.props;
         const isLogin = Session.isAuthSession();
-        const username = Session.getSessionDispalyName();
+        const username = Session.getUserDispalyName();
         const notLogin = (
             <div>
                 <Link to={{pathname: '/login', state: {from: location}}}

@@ -42,7 +42,7 @@ class Main extends React.Component {
     }
 
     loginOut() {
-        let userParams = Session.getSessionData();
+        let userParams = Session.getUserData();
         if (userParams != null) {
             let reqObj = {};
             reqObj.userId = userParams.userId;
@@ -50,12 +50,13 @@ class Main extends React.Component {
             if (MessageBox.showLoadingMessage("正在退出登录")) {
                 Api.postUrl(Api.Url.USER.LOGOUT, reqObj).then(() => {
                     MessageBox.closeLoadingMessage();
-                    Session.deleteSession();
+                    Session.deleteUserSession();
                     this.props.history.push('/login');
                 }, () => {
                     MessageBox.closeLoadingMessage();
                     MessageBox.showErrorMessage("退出登录失败");
-
+                    Session.deleteUserSession();
+                    this.props.history.push('/login');
                     /*  message({
                           type: 'error', message: '退出登录失败'
                       });*/

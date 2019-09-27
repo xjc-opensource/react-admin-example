@@ -106,7 +106,6 @@ export class ReactRequest extends React.Component {
     }
 
     checkShowLoad() {
-        console.log(this.state.loading);
         return true === this.state.loading;
     }
 

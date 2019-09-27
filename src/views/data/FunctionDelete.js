@@ -1,4 +1,3 @@
-import React from "react";
 import {FunctionRequest} from "./FunctionRequest";
 
 export class FunctionDelete extends FunctionRequest {
@@ -34,9 +33,10 @@ export class FunctionDelete extends FunctionRequest {
             };
 
             console.log(reqParams);
+            console.log(this.props.url);
             this.requestDataExtendPost(this.props.url, reqParams);
         }
-    }
+    };
 
     processResponseData(data) {
         console.log("processResponseData:", data);

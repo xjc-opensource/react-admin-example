@@ -1,0 +1,13 @@
+version: '3'
+services:
+  react-admin-example.build:
+    build:
+      context: ../..
+      dockerfile: ./docker/Dockerfile
+    image: 'react-admin-example:mockjs'
+
+  react-admin-example.hub:
+    build:
+      context: ../..
+      dockerfile: ./docker/Dockerfile
+    image: benxjc/react-admin-example:mockjs  # goes to youruser DockerHub registry

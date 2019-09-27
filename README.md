@@ -138,6 +138,11 @@ github地址：[基于react+antd的后台框架](https://github.com/xjc-opensour
     browserRouter： url后面加上/a/b, 但服务器需要把所有路径重定向到首页。
 ~~~
 
+#docker
+   docker run --restart=unless-stopped  --name react-admin-example_mockjs -p 3100:80 -d benxjc/react-admin-example:mockjs
+   
+
+
 # 相关资料
 * react学习手册
 * react入门教程: http://www.runoob.com/react  

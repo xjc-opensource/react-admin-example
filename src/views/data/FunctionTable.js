@@ -1,4 +1,5 @@
 import {FunctionBasetable} from "./FunctionBaseTable";
+import Message from "../../core/message";
 
 class FunctionTable extends FunctionBasetable {
     constructor(props) {
@@ -16,7 +17,7 @@ class FunctionTable extends FunctionBasetable {
     }
 
     refreshTable = () => {
-        this.requestListData(this.params);
+        this.requestFunctionData();
     }
 
     handeEditData = (record) => {
@@ -27,7 +28,7 @@ class FunctionTable extends FunctionBasetable {
                 this.props.event.editEvent(keyValue);
             }
         } else {
-            alert("key is not define");
+            Message.showErrorMessage("rowkey is not define");
         }
     }
 
@@ -39,7 +40,7 @@ class FunctionTable extends FunctionBasetable {
                 this.props.event.deleteEvent(keyValue);
             }
         } else {
-            alert("key is not define");
+            Message.showErrorMessage("rowkey is not define");
         }
     };
 
@@ -49,7 +50,7 @@ class FunctionTable extends FunctionBasetable {
             this.setPageNum(1);
             this.requestListData(this.params);
         } else {
-            alert("funKey is empty or null");
+            Message.showErrorMessage("funKey is empty or null");
         }
     }
 

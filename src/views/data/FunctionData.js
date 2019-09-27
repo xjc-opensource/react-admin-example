@@ -65,7 +65,6 @@ class FunctionData extends React.Component {
     };
 
     handleEditData = (id) => {
-        console.log("xx", this.relationRef.updateFormObj);
         this.relationRef.updateFormObj.handleEditData(id);
     };
 

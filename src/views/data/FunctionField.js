@@ -2,6 +2,7 @@ import React from 'react';
 import {Form, Input, Button, Modal, Spin, Select} from 'antd';
 import {FunctionRequest} from "./FunctionRequest";
 import Api from "../../api/api";
+import Message from "../../core/message";
 
 export class FunctionReactBoxFormAntd extends FunctionRequest {
     constructor(props) {
@@ -64,8 +65,14 @@ export class FunctionReactBoxFormAntd extends FunctionRequest {
         Api.postUrl(this.fieldListUrl, reqParams).then(res => {
             this.setState({loading: false});
             if ((res.data) && (res.data.fieldListInfo)) {
+
                 console.log("data:", res.data);
                 this.setState({haveField:res.data.fieldListInfo.length > 0, comps: res.data.fieldListInfo});
+
+                if (res.data.fieldListInfo.length === 0) {
+                    Message.showErrorMessage('没有配置信息,请检查配置');
+                    this.handleCloseShow();
+                }
             }
         }, () => {
             this.setState({loading: false});

@@ -26,24 +26,24 @@ let ApiUrl = {
 if (GlobalEnvParams.MOCK_DATA) {
     if (GlobalEnvParams.MOCK_LOGIN) {
         Object.assign(ApiUrl.USER, {
-            LOGIN: '/_mockjs/sys/login',
-            LOGOUT: '/_mockjs/sys/logout',
-            LOGININFO: '/_mockjs/sys/getLoginInfo',
-            MODIFY_PASSWORD: '/_mockjs/sys/modpwassword',
-            GET_COUNT: '/_mockjs/sys/count',
+             LOGIN: '/_mockjs/sys/login',
+             LOGOUT: '/_mockjs/sys/logout',
+             LOGININFO: '/_mockjs/sys/getLoginInfo',
+             MODIFY_PASSWORD: '/_mockjs/sys/modpwassword',
+             GET_COUNT: '/_mockjs/sys/count',
         })
     }
 
     Object.assign(ApiUrl.DATA_FUN, {
-        /*SELECT: '/datafunction/select',
+        SELECT: '/_mockjs/datafunction/select',
         QUERY_FIELDS: '/_mockjs/datafunction/queryFields',
-        QUERY_CMMIT: '/datafunction/queryCmmit',
-        ADD_FIELDS: '/datafunction/addFields',
-        ADD_CMMIT: '/datafunction/addCmmit',
-        UPDATE_FIELDS: '/datafunction/updateFields',
-        UPDATE_CMMIT: '/datafunction/updateCmmit',
-        IMPORT_FIELDS: '/datafunction/importFields',
-        IMPORT_CMMIT: '/datafunction/importCmmit', */
+        //QUERY_CMMIT: '/datafunction/queryCmmit',
+        //ADD_FIELDS: '/datafunction/addFields',
+        //ADD_CMMIT: '/datafunction/addCmmit',
+        //UPDATE_FIELDS: '/datafunction/updateFields',
+        //UPDATE_CMMIT: '/datafunction/updateCmmit',
+        //IMPORT_FIELDS: '/datafunction/importFields',
+        //IMPORT_CMMIT: '/datafunction/importCmmit',
         DELETE: '/_mockjs/datafunction/delete',
         EXPORT: '/datafunction/export',
     })

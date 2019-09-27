@@ -48,6 +48,7 @@ if (target === 'development') {
         ,MOCK_DATA: false
         ,MOCK_LOGIN: false
         ,MOCK_DEMO_USER: false
+        ,IS_BrowserRouter: true
     }
 } else   if (target === 'debug') {
     //本地

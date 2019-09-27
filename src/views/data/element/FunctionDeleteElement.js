@@ -1,6 +1,6 @@
 import {FunctionDelete} from "../FunctionDelete";
 import React from "react";
-import {Dialog, Loading} from "element-react";
+import {Dialog} from "element-react";
 import 'element-theme-default';
 
 export class FunctionDeleteElement extends FunctionDelete {

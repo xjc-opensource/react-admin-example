@@ -101,13 +101,15 @@ class Login extends React.Component {
             loginFlag: 1,
         };
 
+        Session.setSystemInfo("1","1");
+
         this.setState({loading: true});
         Api.postUrl(Api.Url.USER.LOGIN, loginParams).then(res => {
             this.setState({loading: false});
             if ((res.data)) {
 
                 if (1 === res.data.loginResultFlag ) {
-                    Session.saveSession(res.data);
+                    Session.saveUserData(res.data);
                     this.props.history.push('/');
                 } else {
                     MessageBox.showErrorMessage("error:" + res.data.loginResultFlag);
